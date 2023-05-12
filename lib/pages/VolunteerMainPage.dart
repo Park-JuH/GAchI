@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gachi/components/appbar.dart';
+import 'package:gachi/pages/postDetail.dart';
 
 // 최종 편집 : 구도연
 Widget listButton(String name) {
@@ -74,6 +75,7 @@ Widget menu() {
 }
 
 Widget post(BuildContext context) {
+  String title = '스터디 같이 하실 분';
   return InkWell(
     child: Container(
       margin: EdgeInsets.all(10),
@@ -94,13 +96,13 @@ Widget post(BuildContext context) {
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text('스터디 같이 하실 분'),
-                Text(
+              children: [
+                Text(title),
+                const Text(
                   '스터디  D-day  수  11-18시',
                   style: TextStyle(fontSize: 13),
                 ),
-                Text(
+                const Text(
                   '성별무관',
                   style: TextStyle(fontSize: 13),
                 ),
@@ -110,6 +112,9 @@ Widget post(BuildContext context) {
         ),
       ),
     ),
+    onTap: (){
+      Navigator.push(context, MaterialPageRoute(builder: (context) => postDetail(title: title,)));
+    },
   );
 }
 
@@ -135,7 +140,7 @@ class _VolunteerMainPageState extends State<VolunteerMainPage> {
         menu(),
         Container(
           width: double.infinity,
-          height: 300,
+          height: 500,
           child: ListView(
             children: [
               post(context),

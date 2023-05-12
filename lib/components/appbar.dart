@@ -42,7 +42,7 @@ Widget appbar() {
       child: Column(
         children: [
           const SizedBox(
-            height: 70,
+            height: 50,
           ),
           Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -82,7 +82,7 @@ Widget appbar() {
                 ),
               ]),
           const SizedBox(
-            height: 20,
+            height: 40,
           ),
           searchBox(),
           const SizedBox(
