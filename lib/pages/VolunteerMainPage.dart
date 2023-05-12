@@ -113,14 +113,15 @@ Widget post(BuildContext context) {
   );
 }
 
-class mainPage extends StatefulWidget {
-  const mainPage({Key? key}) : super(key: key);
+
+class VolunteerMainPage extends StatefulWidget {
+  const VolunteerMainPage({Key? key}) : super(key: key);
 
   @override
-  State<mainPage> createState() => _mainPageState();
+  State<VolunteerMainPage> createState() => _VolunteerMainPageState();
 }
 
-class _mainPageState extends State<mainPage> {
+class _VolunteerMainPageState extends State<VolunteerMainPage> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -148,3 +149,4 @@ class _mainPageState extends State<mainPage> {
     );
   }
 }
+

@@ -52,13 +52,13 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: PageView(
         controller: controller,
-        children: [
+        children: const [
           Center(
-              child: mainPage()
+              child: VolunteerMainPage()
           ),
-          const Center(child: Text('관심')),
-          const Center(child: Text('채팅')),
-          const Center(child: Text('프로필')),
+          Center(child: Text('관심')),
+          Center(child: Text('채팅')),
+          Center(child: Text('프로필')),
         ],
       ),
       extendBody: true, //to make floating action button notch transparent
