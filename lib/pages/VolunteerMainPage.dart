@@ -73,66 +73,78 @@ Widget menu() {
   );
 }
 
-Widget post() {
-  return Container(
-    margin: EdgeInsets.all(10),
-    decoration: BoxDecoration(
-        border: Border.all(width: 2, color: Colors.black),
-        borderRadius: BorderRadius.circular(20)),
+Widget post(BuildContext context) {
+  return InkWell(
     child: Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Container(
-            margin: EdgeInsets.all(10),
-            child: const CircleAvatar(
-              backgroundImage: AssetImage('assets/images/gachi_logo.jpeg'),
-              radius: 30,
+      margin: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+          border: Border.all(width: 2, color: Colors.black),
+          borderRadius: BorderRadius.circular(20)),
+      child: Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              margin: EdgeInsets.all(10),
+              child: const CircleAvatar(
+                backgroundImage: AssetImage('assets/images/gachi_logo.jpeg'),
+                radius: 30,
+              ),
             ),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text('스터디 같이 하실 분'),
-              Text(
-                '스터디  D-day  수  11-18시',
-                style: TextStyle(fontSize: 13),
-              ),
-              Text(
-                '성별무관',
-                style: TextStyle(fontSize: 13),
-              ),
-            ],
-          )
-        ],
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text('스터디 같이 하실 분'),
+                Text(
+                  '스터디  D-day  수  11-18시',
+                  style: TextStyle(fontSize: 13),
+                ),
+                Text(
+                  '성별무관',
+                  style: TextStyle(fontSize: 13),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     ),
   );
 }
 
-Widget mainPage() {
-  return Column(
-    mainAxisAlignment: MainAxisAlignment.start,
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: <Widget>[
-      appbar(),
-      const SizedBox(
-        width: 10,
-      ),
-      menu(),
-      Container(
-        width: double.infinity,
-        height: 300,
-        child: ListView(
-          children: [
-            post(),
-            post(),
-            post(),
-            post(),
-          ],
+class mainPage extends StatefulWidget {
+  const mainPage({Key? key}) : super(key: key);
+
+  @override
+  State<mainPage> createState() => _mainPageState();
+}
+
+class _mainPageState extends State<mainPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        appbar(),
+        const SizedBox(
+          width: 10,
         ),
-      ),
-    ],
-  );
+        menu(),
+        Container(
+          width: double.infinity,
+          height: 300,
+          child: ListView(
+            children: [
+              post(context),
+              post(context),
+              post(context),
+              post(context),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
 }
