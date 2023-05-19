@@ -1,12 +1,19 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:gachi/pages/mainPost2.dart';
+import 'package:gachi/pages/postDetail.dart';
+import 'package:material_dialogs/dialogs.dart';
+import 'package:material_dialogs/widgets/buttons/icon_button.dart';
+import 'package:material_dialogs/widgets/buttons/icon_outline_button.dart';
+import 'package:pinput/pinput.dart';
 
+import '../components/button.dart';
 import '../components/colors.dart';
+import '../components/pinputs.dart';
 import '../components/texts.dart';
 
 // 모임종료, 모집중, 모집마감
 List<String> mainState = ['모집 중', '모집마감', '모임종료'];
-List<String> gachiTitle = ['밥먹자요', '공부하자요','코노갈분','공모전짱먹어요'];
+List<String> gachiTitle = ['밥먹자요', '공부하자요', '코노갈분', '공모전짱먹어요'];
 List<String> categories = ['목적1', '목적2', '목적3'];
 
 class GachiItem {
@@ -39,6 +46,54 @@ List<GachiItem> gachiItems = [
     category: categories[2], // 카테고리 추가
   ),
 ];
+
+Widget receiveCode(BuildContext context) {
+  return RichText(
+    text: TextSpan(
+      text: '받은 초대 코드를 입력하려면 ',
+      style: TextStyle(color: Colors.black),
+      children: [
+        TextSpan(
+          text: '여기',
+          style: TextStyle(
+            color: Colors.blue,
+            decoration: TextDecoration.underline,
+          ),
+          recognizer: TapGestureRecognizer()
+            ..onTap = () {
+              Dialogs.bottomMaterialDialog(
+               // msg: ' ',
+                title: '초대코드 입력',
+                context: context,
+                actions: [
+                  SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Pinput(
+                          defaultPinTheme: defaultPinTheme,
+                          focusedPinTheme: focusedPinTheme,
+                          validator: (s) {
+                            return s == '2222' ? null : 'Pin is incorrect';
+                          },
+                          pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
+                          showCursor: true,
+                          onCompleted: (pin) => print(pin),
+                        ),
+                        SizedBox(height: 140), // Add spacing here
+                        pinButton('가치'),
+                      ],
+                    ),
+                  ),
+                ],
+              );
+
+            },
+        ),
+      ],
+    ),
+  );
+}
+
 
 // Returns a widget that displays information about a GachiItem.
 Widget buildGachiItem(BuildContext context, GachiItem gachiItem) {
@@ -88,7 +143,6 @@ Widget buildGachiItem(BuildContext context, GachiItem gachiItem) {
                       Spacer(),
                       Text('3/4', style: AppTextStyles.sub1Style)
                     ],
-
                   ),
                 ),
               ],

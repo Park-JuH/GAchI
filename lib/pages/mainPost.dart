@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gachi/components/rescuritAppbar.dart';
 import 'package:gachi/components/colors.dart';
@@ -27,9 +28,12 @@ class _RescuritPageState extends State<RescuritPage> {
       body: ListView(
         children: <Widget>[
           buildGachiItem(context, gachiItems[1]),
-          // buildGachiItem(context, gachiItems[0]),
-          // buildGachiItem(context, gachiItems[2]),
-          // buildGachiItem(context, gachiItems[3]),
+          SizedBox(
+            height: 10,
+          ),
+          buildGachiItem(context, gachiItems[0]),
+          //buildGachiItem(context, gachiItems[2]),
+          //buildGachiItem(context, gachiItems[3]),
           SizedBox(
             height: 20,
           ),
@@ -44,7 +48,9 @@ class _RescuritPageState extends State<RescuritPage> {
               },
             ),
           ),
-          Center(child: Text('받은 초대 코드를 입력하려면 여기')),
+          Center(
+            child: receiveCode(context),
+          ),
           SizedBox(
             height: 50,
           ),
