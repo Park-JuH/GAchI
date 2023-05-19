@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'colors.dart';
 
@@ -23,5 +24,19 @@ class AppTextStyles {
     fontSize: 15.0,
     color:AppColors.stateText
   );
+
+
+  static const TextStyle postTitleTextStyle = TextStyle(
+    color: Color(0xFF053149),
+    fontSize: 24.0,
+    fontWeight: FontWeight.w600,
+  );
+
+  static const postSubTextStyle = TextStyle(
+    color: Colors.black26,
+    fontSize: 18.0,
+    fontWeight: FontWeight.w600,
+  );
+
 
 }

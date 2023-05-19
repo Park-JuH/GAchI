@@ -39,7 +39,7 @@ class _RescuritPageState extends State<RescuritPage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => MakeGachi()),
+                  MaterialPageRoute(builder: (context) => makeGachi()),
                 );
               },
             ),
