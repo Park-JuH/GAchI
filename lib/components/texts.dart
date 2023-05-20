@@ -13,7 +13,7 @@ class AppTextStyles {
 
   static const TextStyle titleStyle = TextStyle(
     fontSize: 15.0,
-    color: AppColors.textColor,
+    color : Colors.black,
   );
   static const TextStyle sub1Style = TextStyle(
     fontSize: 15.0,
@@ -22,7 +22,7 @@ class AppTextStyles {
 
   static const TextStyle stateTextStyle = TextStyle(
     fontSize: 15.0,
-    color:AppColors.stateText
+    color : Color.fromARGB(255, 157, 157, 157),
   );
 
 

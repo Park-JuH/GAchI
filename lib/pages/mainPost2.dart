@@ -11,6 +11,14 @@ import '../components/colors.dart';
 import '../components/pinputs.dart';
 import '../components/texts.dart';
 
+/*    <모집자 페이지>
+      모집자 메인화면면에 들어가는 전반적인 요소들 관리하는 코드
+
+      리스트 생성 : buildGachiItem 위젯
+      초대코드 : receiveCode 위젯
+*
+* */
+
 // 모임종료, 모집중, 모집마감
 List<String> mainState = ['모집 중', '모집마감', '모임종료'];
 List<String> gachiTitle = ['밥먹자요', '공부하자요', '코노갈분', '공모전짱먹어요'];
@@ -47,6 +55,7 @@ List<GachiItem> gachiItems = [
   ),
 ];
 
+// 초대코드 위젯
 Widget receiveCode(BuildContext context) {
   return RichText(
     text: TextSpan(
@@ -62,7 +71,7 @@ Widget receiveCode(BuildContext context) {
           recognizer: TapGestureRecognizer()
             ..onTap = () {
               Dialogs.bottomMaterialDialog(
-               // msg: ' ',
+                // msg: ' ',
                 title: '초대코드 입력',
                 context: context,
                 actions: [
@@ -75,25 +84,31 @@ Widget receiveCode(BuildContext context) {
                           validator: (s) {
                             return s == '2222' ? null : 'Pin is incorrect';
                           },
-                          pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
+                          pinputAutovalidateMode:
+                              PinputAutovalidateMode.onSubmit,
                           showCursor: true,
                           onCompleted: (pin) => print(pin),
                         ),
-                        SizedBox(height: 140), // Add spacing here
-                        pinButton('가치'),
+                        SizedBox(height: 140),
+                        pinButton(
+                          context,
+                          '가치',
+                          '/recruit',
+                          onPressed: () {
+                            print('Navigating to recruit page');
+                          },
+                        ),
                       ],
                     ),
                   ),
                 ],
               );
-
             },
         ),
       ],
     ),
   );
 }
-
 
 // Returns a widget that displays information about a GachiItem.
 Widget buildGachiItem(BuildContext context, GachiItem gachiItem) {

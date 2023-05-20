@@ -2,9 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gachi/components/bottomBar.dart';
 import 'package:gachi/pages/VolunteerMainPage.dart';
-import 'package:stylish_bottom_bar/model/bar_items.dart';
-import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
-
+import 'package:gachi/pages/mainPost.dart';
+import 'package:gachi/pages/makeGachi.dart';
 var heart = false;
 
 PageController controller = PageController();
@@ -24,7 +23,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      initialRoute: '/',
+      routes: {
+        '/':(context)=>MyHomePage(title: 'Flutter Demo Home Page' ),
+        '/makeGachi':(context) => MakeGachi(),
+        '/recurit':(context)=>RescuritPage(),
+      },
     );
   }
 }

@@ -1,10 +1,16 @@
-import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:flutter/material.dart';
-import '../components/colors.dart';
+import '../components/button.dart';
 import '../components/texts.dart';
 
+/*    <모집자 페이지>
+      가치만들기(생성)  페이지에 필요한 전반적인 화면을 관리하는 파일
+*       1. 첫번째 화면 : Select_Datail(화면)
+*       2. 두번째 화면 :  Select_Category(화면), buildSlider(위젯)
+*       3. 세번째 화면 : Last_Step(화면)
+*
+* */
 
-// 첫번째 가치만들기 페이지 
+// 첫번째 가치만들기 페이지
 class Select_Detail extends StatefulWidget {
   @override
   _Select_DetailState createState() => _Select_DetailState();
@@ -81,7 +87,7 @@ class _Select_DetailState extends State<Select_Detail> {
     return Column(
       children: List.generate(
         numberOfSliders,
-            (index) => Column(
+        (index) => Column(
           children: [
             SliderTheme(
               data: SliderTheme.of(context).copyWith(
@@ -114,6 +120,7 @@ class _Select_DetailState extends State<Select_Detail> {
     );
   }
 }
+
 // 2번째 가치만들기 페이지
 class Select_Category extends StatelessWidget {
   @override
@@ -146,26 +153,12 @@ class Select_Category extends StatelessWidget {
                       ],
                     ),
                   ),
-                  CustomRadioButton(
-                    elevation: 1.0,
-                    absoluteZeroSpacing: false,
-                    horizontal: true,
-                    height: 60,
-                    unSelectedColor: Theme.of(context).canvasColor,
-                    buttonLables: ['스터디', '밥', '공모전', '팀플', '담배', '대외활동', '기타'],
-                    buttonValues: ['스터디', '밥', '공모전', '팀플', '담배', '대외활동', '기타'],
-                    unSelectedBorderColor: Colors.green,
-                    selectedBorderColor: Colors.lightGreen,
-                    buttonTextStyle: ButtonTextStyle(
-                      selectedColor: Colors.white,
-                      unSelectedColor: Colors.black,
-                      textStyle: TextStyle(fontSize: 16),
-                    ),
-                    radioButtonValue: (categori) {
-                      print(categori); // categori 출력
-                    },
-                    selectedColor: AppColors.mainColor,
-                  ),
+                  Center(
+                    child: categoriesButtons(context,
+                        onRadioButtonChanged: (category) {
+                      print(category);
+                    }),
+                  )
                 ],
               ),
             ),
