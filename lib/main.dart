@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gachi/components/bottomBar.dart';
 import 'package:gachi/pages/VolunteerMainPage.dart';
+import 'package:gachi/pages/loginMain.dart';
 import 'package:gachi/pages/mainPost.dart';
 import 'package:gachi/pages/makeGachi.dart';
 var heart = false;
@@ -23,11 +24,14 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      initialRoute: '/loginHome',
       routes: {
         '/':(context)=>MyHomePage(title: 'Flutter Demo Home Page' ),
         '/makeGachi':(context) => MakeGachi(),
         '/recurit':(context)=>RescuritPage(),
+        '/loginHome':(context)=>LoginMainPage(),
+        '/login':(context)=>LoginMainPage(),
+      //  '/regiseter':(context)=>(), 여기에 회원가입 페이지추가하면 돼요.
       },
     );
   }

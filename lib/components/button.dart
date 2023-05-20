@@ -2,7 +2,18 @@ import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:flutter/material.dart';
 
 import 'colors.dart';
-
+/*
+*   버튼관리 코드
+*   route는 main에서 관리함.
+*   ex )
+* TextButton(
+        onPressed: () {
+          Navigator.pushNamed(context, route);        // route -> main.dart
+          if (onPressed != null) {
+            onPressed();
+          }
+        },
+* */
 Widget button(String text, {VoidCallback? onPressed}) {
   return Align(
     alignment: Alignment.center,
@@ -11,7 +22,8 @@ Widget button(String text, {VoidCallback? onPressed}) {
         width: 240,
         height: 50,
         decoration: BoxDecoration(
-            color: AppColors.sub2Color, borderRadius: BorderRadius.circular(25)),
+            color: AppColors.sub2Color, borderRadius: BorderRadius.circular(25),
+        ),
         child: TextButton(
           onPressed: onPressed,
           style: TextButton.styleFrom(
@@ -94,5 +106,31 @@ Widget categoriesButtons(BuildContext context, {Function(String)? onRadioButtonC
       print(categori); // categori 출력
     },
     selectedColor: AppColors.mainColor,
+  );
+}
+
+Widget registerbutton(BuildContext context, String text, String route, {VoidCallback? onPressed}) {
+  return Align(
+    alignment: Alignment.center,
+    child: Container(
+        margin: const EdgeInsets.all(10),
+        width: 210,
+        height: 45,
+        decoration: BoxDecoration(
+          color: AppColors.sub2Color, borderRadius: BorderRadius.circular(25),
+        ),
+        child: TextButton(
+          onPressed: () {
+            Navigator.pushNamed(context, route);
+            if (onPressed != null) {
+              onPressed();
+            }
+          },
+          style: TextButton.styleFrom(
+            primary: Colors.white, // This sets the text color
+          ),
+          child: Center(child: Text(text,style: TextStyle(fontSize: 18,color: Colors.white),)),
+        )
+    ),
   );
 }

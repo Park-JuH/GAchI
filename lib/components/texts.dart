@@ -5,19 +5,24 @@ import 'colors.dart';
 
 // text 디자인 관리하는 코드 !
 class AppTextStyles {
+
+  static const TextStyle text_style = TextStyle(
+    color : Colors.black,
+  );
+
   static const TextStyle mainStyle = TextStyle(
     fontSize: 19.0,
-    color: AppColors.textColor,     // black
+    color : Colors.black,   // black
     fontWeight: FontWeight.w100,
   );
 
   static const TextStyle titleStyle = TextStyle(
-    fontSize: 15.0,
+    fontSize: 16.0,
     color : Colors.black,
   );
   static const TextStyle sub1Style = TextStyle(
     fontSize: 15.0,
-    color: AppColors.textColor,
+    color : Colors.black,
   );
 
   static const TextStyle stateTextStyle = TextStyle(
@@ -38,5 +43,9 @@ class AppTextStyles {
     fontWeight: FontWeight.w600,
   );
 
+  static const TextStyle postSub2TextStyle = TextStyle(
+    color: Colors.black87,
+    fontSize: 16.0,
+  );
 
 }
