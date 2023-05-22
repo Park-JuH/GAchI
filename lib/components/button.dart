@@ -134,3 +134,35 @@ Widget registerbutton(BuildContext context, String text, String route, {VoidCall
     ),
   );
 }
+
+
+/*               프로필 버튼 페이지  */
+Widget profileModify_button(BuildContext context, String text, String route,
+    {VoidCallback? onPressed}) {
+  double screenWidth = MediaQuery.of(context).size.width;
+  double buttonWidth = screenWidth * 0.20; // 버튼 넓이
+  return Align(
+    alignment: Alignment.center,
+    child: Container(
+      margin: const EdgeInsets.only(right: 10),
+      width: buttonWidth,
+      height: 35,
+      decoration: BoxDecoration(
+        color: AppColors.sub2Color,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: TextButton(
+        onPressed: () {
+          Navigator.pushNamed(context, route);
+          if (onPressed != null) {
+            onPressed();
+          }
+        },
+        style: TextButton.styleFrom(
+          primary: Colors.white, // This sets the text color
+        ),
+        child: Center(child: Text(text)),
+      ),
+    ),
+  );
+}

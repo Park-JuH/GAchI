@@ -48,4 +48,9 @@ class AppTextStyles {
     fontSize: 16.0,
   );
 
+  static const TextStyle nicknameTextStyle = TextStyle(
+    color: Colors.black87,
+    fontSize: 20.0,
+    fontWeight: FontWeight.bold,
+  );
 }
