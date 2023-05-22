@@ -4,7 +4,10 @@ import 'package:gachi/components/bottomBar.dart';
 import 'package:gachi/pages/VolunteerMainPage.dart';
 import 'package:gachi/pages/loginMain.dart';
 import 'package:gachi/pages/mainPost.dart';
+import 'package:gachi/pages/profileMain.dart';
 import 'package:gachi/pages/makeGachi.dart';
+import 'package:gachi/pages/settingsMain.dart';
+
 var heart = false;
 
 PageController controller = PageController();
@@ -31,6 +34,9 @@ class MyApp extends StatelessWidget {
         '/recurit':(context)=>RescuritPage(),
         '/loginHome':(context)=>LoginMainPage(),
         '/login':(context)=>LoginMainPage(),
+        '/profile':(context)=>ProfilePage(),
+        '/settings':(context)=>SettingsPage(),
+        '/profileModify':(context)=>ProfileModify(),
       //  '/regiseter':(context)=>(), 여기에 회원가입 페이지추가하면 돼요.
       },
     );
@@ -60,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Center(child: Text('관심')),
           Center(child: Text('채팅')),
-          Center(child: Text('프로필')),
+          Center(child: ProfilePage()),
         ],
       ),
       extendBody: true,

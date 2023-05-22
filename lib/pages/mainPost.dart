@@ -1,12 +1,10 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:gachi/components/rescuritAppbar.dart';
 import 'package:gachi/components/colors.dart';
 
+import '../components/appbar.dart';
 import '../components/bottomBar.dart';
 import '../components/button.dart';
 import 'mainPost2.dart';
-import 'makeGachi.dart';
 
 /*    <모집자 페이지>
       모집자 메인화면임.
