@@ -43,6 +43,7 @@ dependencies:
   survey_kit: ^0.1.2
   material_dialogs: ^1.1.4
   pinput: ^2.2.31
+  image_picker: ^0.8.7+5
 
 
 dev_dependencies:

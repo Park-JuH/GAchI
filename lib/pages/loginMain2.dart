@@ -1,35 +1,34 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gachi/components/texts.dart';
-
+import 'package:gachi/pages/userAdd/userAdd.dart';
 import '../components/button.dart';
 
 Widget loginImageBox() {
   return Container(
     width: 200,
     height: 200,
-    margin: EdgeInsets.all(30),
-    decoration: BoxDecoration(
+    margin: const EdgeInsets.all(30),
+    decoration: const BoxDecoration(
         image: DecorationImage(
-      image: const AssetImage('assets/images/dog2.png'),
+      image: AssetImage('assets/images/dog2.png'),
     )),
   );
 }
 
 Widget loginTextBox() {
-  return Container(
+  return const SizedBox(
     child: Column(
       children: [
         Text(
           '나랑놀자!',
           style: AppTextStyles.postTitleTextStyle,
         ),
-        const SizedBox(height: 10),
+        SizedBox(height: 10),
         Text(
           '가천대학교 가치창출앱',
           style: AppTextStyles.postSub2TextStyle,
         ),
-        const SizedBox(height: 30),
+        SizedBox(height: 30),
       ],
     ),
   );
@@ -37,7 +36,7 @@ Widget loginTextBox() {
 
 Widget registerBox(BuildContext context) {
   return Container(
-    child: registerbutton(context, '가입하기', '/regiseter'),
+    child: registerbutton(context, '가입하기', '/register'),
   );
 }
 Widget loginBox(BuildContext context) {

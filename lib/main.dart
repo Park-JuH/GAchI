@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gachi/components/bottomBar.dart';
 import 'package:gachi/pages/VolunteerMainPage.dart';
@@ -7,6 +6,7 @@ import 'package:gachi/pages/mainPost.dart';
 import 'package:gachi/pages/profileMain.dart';
 import 'package:gachi/pages/makeGachi.dart';
 import 'package:gachi/pages/settingsMain.dart';
+import 'package:gachi/pages/userAdd/userAdd.dart';
 
 var heart = false;
 
@@ -29,14 +29,15 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/loginHome',
       routes: {
-        '/':(context)=>MyHomePage(title: 'Flutter Demo Home Page' ),
-        '/makeGachi':(context) => MakeGachi(),
-        '/recurit':(context)=>RescuritPage(),
-        '/loginHome':(context)=>LoginMainPage(),
-        '/login':(context)=>LoginMainPage(),
-        '/profile':(context)=>ProfilePage(),
-        '/settings':(context)=>SettingsPage(),
-        '/profileModify':(context)=>ProfileModify(),
+        '/':(context)=>const MyHomePage(title: 'Flutter Demo Home Page' ),
+        '/makeGachi':(context) => const MakeGachi(),
+        '/recurit':(context)=> const RescuritPage(),
+        '/loginHome':(context)=> const LoginMainPage(),
+        '/login':(context)=> const LoginMainPage(),
+        '/profile':(context)=> const ProfilePage(),
+        '/settings':(context)=> const SettingsPage(),
+        '/profileModify':(context)=> const ProfileModify(),
+        '/register':(context)=> const NickName(),
       //  '/regiseter':(context)=>(), 여기에 회원가입 페이지추가하면 돼요.
       },
     );

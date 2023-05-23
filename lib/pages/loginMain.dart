@@ -1,5 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:gachi/pages/profileMain2.dart';
+import 'package:gachi/pages/userAdd/userAdd.dart';
 
 import '../components/texts.dart';
 import 'loginMain2.dart';
@@ -81,6 +83,8 @@ class _LoginMainPageState extends State<LoginMainPage> {
               ..onTap = () {
                 setState(() {
                   isLoginBoxVisible = !isLoginBoxVisible;
+                  if (!isLoginBoxVisible)
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>NickName()));
                 });
               },
           ),
