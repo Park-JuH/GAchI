@@ -1,6 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:flutter/material.dart';
-
+import 'package:firebase_core/firebase_core.dart';
 import 'colors.dart';
 /*
 *   버튼관리 코드
@@ -14,6 +15,9 @@ import 'colors.dart';
           }
         },
 * */
+
+
+
 Widget button(String text, {VoidCallback? onPressed}) {
   return Align(
     alignment: Alignment.center,
@@ -110,6 +114,7 @@ Widget categoriesButtons(BuildContext context, {Function(String)? onRadioButtonC
 }
 
 Widget registerbutton(BuildContext context, String text, String route, {VoidCallback? onPressed}) {
+  FirebaseFirestore fireStore=FirebaseFirestore.instance;
   return Align(
     alignment: Alignment.center,
     child: Container(
@@ -121,9 +126,13 @@ Widget registerbutton(BuildContext context, String text, String route, {VoidCall
         ),
         child: TextButton(
           onPressed: () {
-            Navigator.pushNamed(context, route);
-            if (onPressed != null) {
-              onPressed();
+            try {
+              Navigator.pushNamed(context, route);
+              if (onPressed != null) {
+                onPressed();
+              }
+            } catch (e) {
+              print('Error: $e');
             }
           },
           style: TextButton.styleFrom(
@@ -163,6 +172,50 @@ Widget profileModify_button(BuildContext context, String text, String route,
         ),
         child: Center(child: Text(text)),
       ),
+    ),
+  );
+}
+
+Widget loginbutton(BuildContext context, String text, String route, String username, String password, {VoidCallback? onPressed}) {
+  return Align(
+    alignment: Alignment.center,
+    child: Container(
+        margin: const EdgeInsets.all(10),
+        width: 210,
+        height: 45,
+        decoration: BoxDecoration(
+          color: AppColors.sub2Color, borderRadius: BorderRadius.circular(25),
+        ),
+        child: TextButton(
+          onPressed: () async {
+            int id_pw = 0;
+            QuerySnapshot usersSnapshot = await FirebaseFirestore.instance.collection('Users').get();
+            List<QueryDocumentSnapshot> userDocuments = usersSnapshot.docs;
+
+            for (QueryDocumentSnapshot document in userDocuments) {
+              if (document['id'] == username) {
+                id_pw += 1;
+                if (document['pw'] == password) {
+                  Navigator.pushNamed(context, route);
+                }
+              }
+            }
+            if (id_pw == 0){
+              print("올바르지 않은 id 입니다.");
+            }
+            else {
+              print('비밀번호가 올바르지 않습니다');
+            }
+            // Navigator.pushNamed(context, route);
+            if (onPressed != null) {
+              onPressed();
+            }
+          },
+          style: TextButton.styleFrom(
+            primary: Colors.white, // This sets the text color
+          ),
+          child: Center(child: Text(text,style: TextStyle(fontSize: 18,color: Colors.white),)),
+        )
     ),
   );
 }

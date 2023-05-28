@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gachi/components/appbar.dart';
 import 'package:gachi/pages/postDetail.dart';
@@ -6,7 +8,6 @@ import 'package:gachi/pages/postDetail.dart';
 Widget listButton(String name) {
   List<String> dropdownList = [name, '1', '2'];
   String selectedDropdown = name;
-
   return Container(
     padding: const EdgeInsets.only(left: 7),
     width: 60,
@@ -129,6 +130,7 @@ class VolunteerMainPage extends StatefulWidget {
 class _VolunteerMainPageState extends State<VolunteerMainPage> {
   @override
   Widget build(BuildContext context) {
+    // getCurrentUserData();
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -155,3 +157,24 @@ class _VolunteerMainPageState extends State<VolunteerMainPage> {
   }
 }
 
+
+// Future<Object?> getCurrentUserData() async {
+//   User? currentUser = FirebaseAuth.instance.currentUser;
+//
+//   if (currentUser != null) {
+//     String uid = currentUser.uid;
+//     DocumentSnapshot userDoc = await FirebaseFirestore.instance.collection('Users').doc(uid).get();
+//
+//     if (userDoc.exists) {
+//       Object? userData = userDoc.data();
+//       print(userData);
+//       return userData;
+//     } else {
+//       print("현재 사용자의 문서가 존재하지 않습니다.");
+//     }
+//   } else {
+//     print("현재 사용자가 인증되지 않았습니다.");
+//   }
+//
+//   return null;
+// }

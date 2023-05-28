@@ -14,7 +14,7 @@ class _NickNameState extends State<NickName> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: userAddForm(0, ' 닉네임을 입력하세요', 'Gachi에서 사용할 이름이에요!\n7자 이하로 설정해주세요', '닉네임을 입력해주세요', 7, const ID())
+      body: userAddForm(0, ' 닉네임을 입력하세요', 'Gachi에서 사용할 이름이에요!\n7자 이하로 설정해주세요', '닉네임을 입력해주세요', 7, const ID()),
     );
   }
 }

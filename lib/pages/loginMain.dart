@@ -59,7 +59,7 @@ class _LoginMainPageState extends State<LoginMainPage> {
               ),
             ),
             if (!isLoginBoxVisible) loginTextBox(),
-            isLoginBoxVisible ? loginBox(context) : registerBox(context),
+            isLoginBoxVisible ? loginBox(context,username,password) : registerBox(context),
             loginText(context),
           ],
         ),

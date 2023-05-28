@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:gachi/components/bottomBar.dart';
-import 'package:gachi/pages/VolunteerMainPage.dart';
+import 'package:gachi/pages/bottomMenuPage/VolunteerMainPage.dart';
+import 'package:gachi/pages/bottomMenuPage/chatting.dart';
 import 'package:gachi/pages/loginMain.dart';
 import 'package:gachi/pages/mainPost.dart';
-import 'package:gachi/pages/profileMain.dart';
+import 'package:gachi/pages/bottomMenuPage/profileMain.dart';
 import 'package:gachi/pages/makeGachi.dart';
 import 'package:gachi/pages/settingsMain.dart';
 import 'package:gachi/pages/userAdd/userAdd.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 var heart = false;
 
 PageController controller = PageController();
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -38,7 +42,7 @@ class MyApp extends StatelessWidget {
         '/settings':(context)=> const SettingsPage(),
         '/profileModify':(context)=> const ProfileModify(),
         '/register':(context)=> const NickName(),
-      //  '/regiseter':(context)=>(), 여기에 회원가입 페이지추가하면 돼요.
+        //  '/regiseter':(context)=>(), 여기에 회원가입 페이지추가하면 돼요.
       },
     );
   }
@@ -61,17 +65,17 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: PageView(
         controller: controller,
-        children: const [
+        children: [
           Center(
               child: VolunteerMainPage()
           ),
           Center(child: Text('관심')),
-          Center(child: Text('채팅')),
+          Center(child: Chatting()),
           Center(child: ProfilePage()),
         ],
       ),
       extendBody: true,
-      bottomNavigationBar: BottomBar(),
+      bottomNavigationBar: const BottomBar(),
       floatingActionButton: const FloatingButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );

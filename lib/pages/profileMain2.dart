@@ -1,8 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../components/button.dart';
 import '../components/colors.dart';
 import '../components/texts.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+FirebaseFirestore _firestore = FirebaseFirestore.instance;
+FirebaseAuth _auth = FirebaseAuth.instance;
+User? _user = _auth.currentUser;
 
 Widget profileImage() {
   return Container(

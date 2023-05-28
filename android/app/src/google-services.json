@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1008750887664",
+    "project_id": "mp-gachi",
+    "storage_bucket": "mp-gachi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1008750887664:android:95b1fbfef29ff04f3d3835",
+        "android_client_info": {
+          "package_name": "com.example.gachi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1008750887664-dtd85m8v27s1sj9ra0mq50jagavb6h22.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLwBPr00Zgsbz1RCNDk3rBI1emuasM8b0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1008750887664-dtd85m8v27s1sj9ra0mq50jagavb6h22.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

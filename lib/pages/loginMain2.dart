@@ -39,9 +39,9 @@ Widget registerBox(BuildContext context) {
     child: registerbutton(context, '가입하기', '/register'),
   );
 }
-Widget loginBox(BuildContext context) {
+Widget loginBox(BuildContext context, String username, String password) {
   return Container(
-    child: registerbutton(context, '로그인하기', '/'),
+    child: loginbutton(context, '로그인하기', '/',username,password),
   );
 }
 
