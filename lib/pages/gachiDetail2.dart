@@ -203,7 +203,7 @@ Widget gachiEndButton(BuildContext context, bool isClosed) {
       ),
       child: TextButton(
         onPressed: () {
-          showRatingDialog(context);
+          //showRatingDialog(context);
           // bool isRecruitingClosed = false; // 모집마감 여부를 저장하는 변수는 gachiDetail.dart에 있음.
         },
         style: TextButton.styleFrom(
