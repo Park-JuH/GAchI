@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../pages/settingsMain.dart';
 import 'button.dart';
 import 'colors.dart';
 
@@ -159,6 +158,34 @@ Widget profileAppbar(BuildContext context) {
             Container(
               child: Row(
                 children: [
+                  gachiImage(),
+                ],
+              ),
+            ),
+            Container(
+              child: profileModify_button(context, '프로필수정', '/profileModify')
+                ),
+          ],
+        ),
+      ],
+    ),
+  );
+}
+Widget gachiDetailAppbar(BuildContext context) {
+  return Container(
+    height: 120,
+    child: Column(
+      children: [
+        SizedBox(
+          height: 30,
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              child: Row(
+                children: [
                   GestureDetector(
                     onTap: () {
                       Navigator.pop(context); // 뒤로가기 동작 추가
@@ -173,8 +200,8 @@ Widget profileAppbar(BuildContext context) {
               ),
             ),
             Container(
-              child: profileModify_button(context, '프로필수정', '/profileModify')
-                ),
+                child: profileModify_button(context, '가치 수정', '/profileModify')
+            ),
           ],
         ),
       ],
