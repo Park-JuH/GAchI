@@ -101,6 +101,7 @@ Widget profileBox2() {
         Divider(
           thickness: 0,
         ),
+
         listBox('활동 뱃지'),
         listBox('다크모드'),
         listBox('개발자에게 '),

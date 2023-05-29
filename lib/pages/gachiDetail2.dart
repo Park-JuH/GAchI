@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:gachi/pages/postDetail.dart';
+import 'package:gachi/pages/review.dart';
 
 import '../components/colors.dart';
 
@@ -202,7 +203,7 @@ Widget gachiEndButton(BuildContext context, bool isClosed) {
       ),
       child: TextButton(
         onPressed: () {
-          //  여기에 기능 추가  : 누르면 참여자들에게
+          showRatingDialog(context);
           // bool isRecruitingClosed = false; // 모집마감 여부를 저장하는 변수는 gachiDetail.dart에 있음.
         },
         style: TextButton.styleFrom(
