@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:gachi/pages/postDetail.dart';
-import 'package:gachi/pages/review.dart';
 
 import '../components/colors.dart';
 

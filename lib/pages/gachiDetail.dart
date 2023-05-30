@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gachi/components/colors.dart';
 import 'package:gachi/pages/mainPost2.dart';
 
 import '../components/appbar.dart';
-import '../components/bottomBar.dart';
 import '../components/variable.dart';
 import 'gachiDetail2.dart';
 
@@ -38,7 +36,7 @@ class _gachiDetailState extends State<gachiDetail>
       appBar: PreferredSize(
         preferredSize:
         Size.fromHeight(MediaQuery.of(context).size.height * 0.2),
-        child: gachiDetailAppbar(context),
+        child: gachiDetailAppbar(context,'모임 종료','\loginHome'),
       ),
       body: Stack(
         children: <Widget>[

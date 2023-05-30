@@ -171,7 +171,7 @@ Widget profileAppbar(BuildContext context) {
     ),
   );
 }
-Widget gachiDetailAppbar(BuildContext context) {
+Widget gachiDetailAppbar(BuildContext context, String text, String path) {
   return Container(
     height: 120,
     child: Column(
@@ -200,7 +200,7 @@ Widget gachiDetailAppbar(BuildContext context) {
               ),
             ),
             Container(
-                child: profileModify_button(context, '가치 수정', '/profileModify')
+                child: profileModify_button(context, text, path)
             ),
           ],
         ),
