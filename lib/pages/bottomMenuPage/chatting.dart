@@ -18,7 +18,20 @@ class _ChattingState extends State<Chatting> {
         Size.fromHeight(MediaQuery.of(context).size.height * 0.2),
         child: appbar(),
       ),
-      body: NewMessage(),
+      body: Container(
+        child: Column(
+          children: [
+            Expanded(child: Text("Hi, there!")), //Messages()),
+            Column(
+              children: [
+                NewMessage(),
+                SizedBox(height: 90,)
+              ],
+            )
+          ],
+
+        ),
+      )
     );
   }
 }
