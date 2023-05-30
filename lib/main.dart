@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:gachi/components/bottomBar.dart';
 import 'package:gachi/pages/bottomMenuPage/VolunteerMainPage.dart';
@@ -6,17 +7,26 @@ import 'package:gachi/pages/loginMain.dart';
 import 'package:gachi/pages/mainPost.dart';
 import 'package:gachi/pages/bottomMenuPage/profileMain.dart';
 import 'package:gachi/pages/makeGachi.dart';
-import 'package:gachi/pages/settingsMain.dart';
 import 'package:gachi/pages/userAdd/userAdd.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
+import 'package:gachi/pages/userAdd/gachiForm.dart';
+
 
 var heart = false;
 
 PageController controller = PageController();
+
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => FormData(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -31,18 +41,17 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/loginHome',
+      initialRoute: '/',
       routes: {
         '/':(context)=>const MyHomePage(title: 'Flutter Demo Home Page' ),
-        '/makeGachi':(context) => const MakeGachi(),
+        '/makeGachi':(context) =>  MakeGachi(),
         '/recurit':(context)=> const RescuritPage(),
         '/loginHome':(context)=> const LoginMainPage(),
         '/login':(context)=> const LoginMainPage(),
         '/profile':(context)=> const ProfilePage(),
-        '/settings':(context)=> const SettingsPage(),
+        //'/settings':(context)=> const SettingsPage(),
         '/profileModify':(context)=> const ProfileModify(),
         '/register':(context)=> const NickName(),
-        //  '/regiseter':(context)=>(), 여기에 회원가입 페이지추가하면 돼요.
       },
     );
   }
@@ -55,6 +64,7 @@ class MyHomePage extends StatefulWidget {
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
+
 }
 
 
