@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "878351682851",
+    "project_id": "gachi-27bfd",
+    "storage_bucket": "gachi-27bfd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:878351682851:android:bd09f5124d291d80f79096",
+        "android_client_info": {
+          "package_name": "com.example.gachi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXohqXq8mThmn_gUOfAttWKwPcurMpAo4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

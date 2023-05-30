@@ -187,7 +187,8 @@ Widget loginbutton(BuildContext context, String text, String route, String usern
           color: AppColors.sub2Color, borderRadius: BorderRadius.circular(25),
         ),
         child: TextButton(
-          onPressed: () async {
+          onPressed: () {/*
+          async {
             int id_pw = 0;
             QuerySnapshot usersSnapshot = await FirebaseFirestore.instance.collection('Users').get();
             List<QueryDocumentSnapshot> userDocuments = usersSnapshot.docs;
@@ -205,8 +206,8 @@ Widget loginbutton(BuildContext context, String text, String route, String usern
             }
             else {
               print('비밀번호가 올바르지 않습니다');
-            }
-            // Navigator.pushNamed(context, route);
+            }*/
+            Navigator.pushNamed(context, route);
             if (onPressed != null) {
               onPressed();
             }

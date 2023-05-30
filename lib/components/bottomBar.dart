@@ -5,6 +5,12 @@ import 'package:stylish_bottom_bar/model/bar_items.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 
 import '../pages/mainPost.dart';
+
+bool chk=true;
+/*
+* 메인화면에서 보이는 하단바.
+* (4+1)개 버튼.
+* */
 var heart = false;
 var itemList = [
   BottomBarItem(
@@ -42,7 +48,8 @@ var itemList = [
 ];
 
 class FloatingButton extends StatefulWidget {
-  const FloatingButton({Key? key}) : super(key: key);
+  FloatingButton(this.getPage, {Key? key}) : super(key: key);
+  Function getPage;
 
   @override
   State<FloatingButton> createState() => _FloatingButtonState();
@@ -53,17 +60,17 @@ class _FloatingButtonState extends State<FloatingButton> {
   Widget build(BuildContext context) {
     return  FloatingActionButton(
       onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => RescuritPage()),
-        );
         setState(() {
-          heart = !heart;
+          chk = !chk;
+          if (chk == true)
+            widget.getPage(0);
+          else
+            widget.getPage(1);
         });
       },
       backgroundColor: Colors.white,
       child: Icon(
-        heart ? Icons.add_sharp : Icons.heart_broken,
+        chk ? Icons.person_add_alt_1_rounded : Icons.person_search_rounded,
         color: Colors.red,
       ),
     );

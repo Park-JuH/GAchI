@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gachi/components/appbar.dart';
 import 'package:gachi/components/colors.dart';
-
-import '../components/appbar.dart';
-import '../components/bottomBar.dart';
-import '../components/button.dart';
-import 'mainPost2.dart';
+import 'package:gachi/pages/mainPost2.dart';
 
 /*    <모집자 페이지>
       모집자 메인화면임.
@@ -22,46 +19,39 @@ import 'mainPost2.dart';
 *
 * */
 
-class RescuritPage extends StatefulWidget {
-  const RescuritPage({Key? key}) : super(key: key);
+class Interesting extends StatefulWidget {
+  const Interesting({Key? key}) : super(key: key);
 
   @override
-  State<RescuritPage> createState() => _RescuritPageState();
+  State<Interesting> createState() => _InterestingState();
 }
 
-class _RescuritPageState extends State<RescuritPage> {
+class _InterestingState extends State<Interesting> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize:
-            Size.fromHeight(MediaQuery.of(context).size.height * 0.2),
+        Size.fromHeight(MediaQuery.of(context).size.height * 0.2),
         child: rescuritappbar(),
       ),
       backgroundColor: AppColors.sub1Color,
       body: ListView(
         children: <Widget>[
           buildGachiItem(context, gachiItems[1]),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           buildGachiItem(context, gachiItems[0]),
           //buildGachiItem(context, gachiItems[2]),
           //buildGachiItem(context, gachiItems[3]),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Center(
-            child: gachiMakeButton(context, '가치만들기', '/makeGachi')
-          ),
-          Center(
-            child: receiveCode(context),
-          ),
-          SizedBox(
-            height: 50,
-          ),
+
         ],
       ),
     );
   }
 }
+

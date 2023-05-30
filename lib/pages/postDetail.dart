@@ -141,9 +141,6 @@ class _postDetailState extends State<postDetail> {
         ],
       ),
       extendBody: true,
-      bottomNavigationBar: BottomBar(),
-      floatingActionButton: const FloatingButton(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

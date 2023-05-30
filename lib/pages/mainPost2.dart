@@ -11,6 +11,7 @@ import '../components/colors.dart';
 import '../components/pinputs.dart';
 import '../components/texts.dart';
 import 'gachiDetail.dart';
+bool heart = true;
 
 /*    <모집자 페이지>
       모집자 메인화면면에 들어가는 전반적인 요소들 관리하는 코드
@@ -149,8 +150,14 @@ Widget buildGachiItem(BuildContext context, GachiItem gachiItem) {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+              Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(gachiItem.title, style: AppTextStyles.mainStyle),
+                  Heart()
+                ],
+              ),
                   Container(
                     margin: EdgeInsets.only(top: 5),
                     child: Row(
@@ -191,4 +198,25 @@ Widget buildGachiItem(BuildContext context, GachiItem gachiItem) {
       ),
     ),
   );
+}
+
+
+class Heart extends StatefulWidget {
+  const Heart({Key? key}) : super(key: key);
+
+  @override
+  State<Heart> createState() => _HeartState();
+}
+
+class _HeartState extends State<Heart> {
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(onTap : (){
+      setState(() {
+        heart = !heart;
+      });
+    },
+        child: heart == true ? const Icon(Icons.favorite_rounded, color: Colors.deepOrange) : const Icon(Icons.favorite_outline_rounded)
+    );
+  }
 }

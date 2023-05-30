@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:gachi/components/bottomBar.dart';
+import 'package:gachi/firebase_options.dart';
 import 'package:gachi/pages/bottomMenuPage/VolunteerMainPage.dart';
 import 'package:gachi/pages/bottomMenuPage/chatting.dart';
+import 'package:gachi/pages/bottomMenuPage/interesting.dart';
 import 'package:gachi/pages/loginMain.dart';
 import 'package:gachi/pages/mainPost.dart';
 import 'package:gachi/pages/bottomMenuPage/profileMain.dart';
 import 'package:gachi/pages/makeGachi.dart';
-import 'package:gachi/pages/settingsMain.dart';
+//import 'package:gachi/pages/settingsMain.dart';
 import 'package:gachi/pages/userAdd/userAdd.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 var heart = false;
+int pageNum = 0;
+int postNum = 0;
 
 PageController controller = PageController();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
@@ -39,7 +44,7 @@ class MyApp extends StatelessWidget {
         '/loginHome':(context)=> const LoginMainPage(),
         '/login':(context)=> const LoginMainPage(),
         '/profile':(context)=> const ProfilePage(),
-        '/settings':(context)=> const SettingsPage(),
+        //'/settings':(context)=> const SettingsPage(),
         '/profileModify':(context)=> const ProfileModify(),
         '/register':(context)=> const NickName(),
         //  '/regiseter':(context)=>(), 여기에 회원가입 페이지추가하면 돼요.
@@ -59,6 +64,11 @@ class MyHomePage extends StatefulWidget {
 
 
 class _MyHomePageState extends State<MyHomePage> {
+  void getPage(int returnNum) {
+    setState(() {
+      pageNum = returnNum;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,16 +77,16 @@ class _MyHomePageState extends State<MyHomePage> {
         controller: controller,
         children: [
           Center(
-              child: VolunteerMainPage()
+              child: pageNum == 0 ? VolunteerMainPage() : RescuritPage()
           ),
-          Center(child: Text('관심')),
+          Center(child: Interesting()),
           Center(child: Chatting()),
           Center(child: ProfilePage()),
         ],
       ),
       extendBody: true,
       bottomNavigationBar: const BottomBar(),
-      floatingActionButton: const FloatingButton(),
+      floatingActionButton: FloatingButton(getPage),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
