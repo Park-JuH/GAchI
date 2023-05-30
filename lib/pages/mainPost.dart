@@ -53,7 +53,7 @@ class _RescuritPageState extends State<RescuritPage> {
             height: 20,
           ),
           Center(
-            child: gachiMakeButton(context, '가치만들기', '/makeGachi')
+              child: gachiMakeButton(context, '가치만들기', '/makeGachi')
           ),
           Center(
             child: receiveCode(context),

@@ -1,9 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gachi/components/bottomBar.dart';
 import 'package:gachi/main.dart';
-import 'package:stylish_bottom_bar/model/bar_items.dart';
-import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 
 Widget text(String text, double size, FontWeight weight, double bottomSpace){
   return Column(

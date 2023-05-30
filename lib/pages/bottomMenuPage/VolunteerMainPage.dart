@@ -6,7 +6,7 @@ import 'package:gachi/components/colors.dart';
 import 'package:gachi/pages/mainPost2.dart';
 import 'package:gachi/pages/postDetail.dart';
 
-// 최종 편집 : 구도연
+// 최종 편집 : 김지민
 Widget listButton(String name) {
   List<String> dropdownList = [name, '1', '2'];
   String selectedDropdown = name;

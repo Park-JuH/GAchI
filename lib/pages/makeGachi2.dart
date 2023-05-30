@@ -47,8 +47,8 @@ class Select_Category extends StatelessWidget {
                   Center(
                     child: categoriesButtons(context,
                         onRadioButtonChanged: (category) {
-                      print(category);
-                    }),
+                          print(category);
+                        }),
                   )
                 ],
               ),
@@ -168,7 +168,7 @@ class _Select_DetailState extends State<Select_Detail> {
                     },
                     min: 0,
                     max: index == 0 ? 10 : (maxValue >= 0 ? maxValue : 0),
- // index에 따라 max 값을 설정
+                    // index에 따라 max 값을 설정
                   ),
                 ),
                 Text(

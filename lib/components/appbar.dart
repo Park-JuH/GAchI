@@ -5,25 +5,30 @@ import 'colors.dart';
 
 // 메인 화면의 같은 색 상단 부분을 지정하는 코드입니다.
 /*
-* 수정일 : 0508
-* 수정자 : 구도연
+* 수정일 : 0530
+* 수정자 : 김지민^^
 * */
 
 Widget searchBox() {
-  return Container(
-    margin: const EdgeInsets.symmetric(horizontal: 20),
-    child: const TextField(
-      decoration: InputDecoration(
-        prefixIcon: Icon(Icons.search), //검색 아이콘 추가
-        contentPadding: EdgeInsets.only(left: 5, bottom: 5, top: 5, right: 5),
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(8),
-            ),
-            borderSide: BorderSide(color: Colors.black)),
-        hintText: '검색 키워드를 입력해주세요',
+  return Column(
+    children: [
+      SizedBox(height: 30,),
+      Container(
+        margin: const EdgeInsets.symmetric(horizontal: 20),
+        child: const TextField(
+          decoration: InputDecoration(
+            prefixIcon: Icon(Icons.search), //검색 아이콘 추가
+            contentPadding: EdgeInsets.all(5),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(8),
+                ),
+                borderSide: BorderSide(color: Colors.black)),
+            hintText: '검색 키워드를 입력해주세요',
+          ),
+        ),
       ),
-    ),
+    ],
   );
 }
 
@@ -37,63 +42,58 @@ Widget gachiImage() {
   );
 }
 
-Widget appbar() {
+Widget appbar(){
   return Container(
-      decoration: const BoxDecoration(
-          color: Colors.grey,
-          borderRadius: BorderRadius.all(Radius.circular(50.0))),
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 50,
-          ),
-          Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                gachiImage(),
-                Container(
-                  margin: const EdgeInsets.only(top: 10),
-                  child: Row(
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          elevation: 0,
-                          backgroundColor: Colors.black12,
-                          shape: RoundedRectangleBorder(
-                              //모서리를 둥글게
-                              borderRadius: BorderRadius.circular(20)),
-                        ),
-                        child: const Text(
-                          "내가치",
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      const Icon(
-                        Icons.notifications_none_rounded,
-                        color: Colors.black,
-                        size: 30,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                    ],
+    height: 140,
+    //color: Colors.yellow,
+    child: Column(
+      children: [
+        const SizedBox(
+          height: 50,
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            gachiImage(),
+            Container(
+              margin: const EdgeInsets.only(top: 10),
+              child: Row(
+                children: [
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      elevation: 0,
+                      backgroundColor: AppColors.sub2Color,
+                      shape: RoundedRectangleBorder(
+                        //모서리를 둥글게
+                          borderRadius: BorderRadius.circular(20)),
+                    ),
+                    child: const Text(
+                      "내가치",
+                    ),
                   ),
-                ),
-              ]),
-          const SizedBox(
-            height: 40,
-          ),
-          searchBox(),
-          const SizedBox(
-            height: 30,
-          ),
-        ],
-      ));
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  const Icon(
+                    Icons.notifications_none_rounded,
+                    color: Colors.black,
+                    size: 30,
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ],
+    ),
+  );
 }
+
 
 /*  모집자 MainPage Appbar */
 Widget rescuritappbar() {
@@ -145,11 +145,11 @@ Widget rescuritappbar() {
 
 Widget profileAppbar(BuildContext context) {
   return Container(
-    height: 120,
+    height: 200,        //  지민 화면 : 120
     child: Column(
       children: [
         SizedBox(
-          height: 30,
+          height: 50,   // 지민 화면 :30
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -171,7 +171,9 @@ Widget profileAppbar(BuildContext context) {
     ),
   );
 }
-Widget gachiDetailAppbar(BuildContext context) {
+
+
+Widget gachiDetailAppbar(BuildContext context, String text, String path) {
   return Container(
     height: 120,
     child: Column(
@@ -200,7 +202,7 @@ Widget gachiDetailAppbar(BuildContext context) {
               ),
             ),
             Container(
-                child: profileModify_button(context, '가치 수정', '/profileModify')
+                child: profileModify_button(context, text, path)
             ),
           ],
         ),
