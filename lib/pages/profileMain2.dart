@@ -25,7 +25,7 @@ Widget nickName() {
   return Container(
     margin: EdgeInsets.only(top: 10),
     child: Text(
-      '앵두', // 닉네임
+      '앵두',                                               // 닉네임 들어가야해요!
       style: AppTextStyles.nicknameTextStyle,
     ),
   );
