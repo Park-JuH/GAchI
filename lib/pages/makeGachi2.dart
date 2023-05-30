@@ -72,7 +72,10 @@ class _Select_DetailState extends State<Select_Detail> {
     FormData formData = Provider.of<FormData>(context);
     return Container(
       alignment: Alignment.center,
-      width: MediaQuery.of(context).size.width,
+      width: MediaQuery
+          .of(context)
+          .size
+          .width,
       padding: const EdgeInsets.symmetric(horizontal: 40),
       child: SingleChildScrollView(
         child: Column(
@@ -118,51 +121,65 @@ class _Select_DetailState extends State<Select_Detail> {
               ),
             ),
             (formData.selectedGender == '혼성') ? buildSlider() : buildSlider(1),
-            //if selected gender is 혼성 then two sliders else one slider
           ],
         ),
       ),
     );
   }
 
-  // 두번째 가치만들기 페이지에 필요한  사람수 표시해주는 슬라이더 컨트롤
   Widget buildSlider([int numberOfSliders = 2]) {
     FormData formData = Provider.of<FormData>(context);
+    double value1 = formData.sliderValue1;
+    double value2 = formData.sliderValue2;
+    double maxValue = 10 - value1; // sliderValue1에 따라 maxValue를 계산
+
     return Column(
       children: List.generate(
         numberOfSliders,
-        (index) => Column(
-          children: [
-            SliderTheme(
-              data: SliderTheme.of(context).copyWith(
-                activeTrackColor: Colors.green,
-                inactiveTrackColor: Colors.green.withOpacity(0.5),
-                thumbColor: Colors.green,
-              ),
-              child: Slider(
-                value: index == 0
-                    ? (formData.sliderValue1)
-                    : (formData.sliderValue2),
-                onChanged: (double value) {
-                  setState(() {
-                    if (index == 0)
-                      formData.sliderValue1 = value;
-                    else
-                      formData.sliderValue2 = value;
-                  });
-                },
-                min: 0,
-                max: 10,
-              ),
+            (index) =>
+            Column(
+              children: [
+                SliderTheme(
+                  data: SliderTheme.of(context).copyWith(
+                    activeTrackColor: Colors.green,
+                    inactiveTrackColor: Colors.green.withOpacity(0.5),
+                    thumbColor: Colors.green,
+                  ),
+                  child: Slider(
+                    value: index == 0 ? value1 : value2,
+                    onChanged: (double value) {
+                      setState(() {
+                        if (index == 0) {
+                          value1 = value;
+                          maxValue =
+                              10 - value1; // sliderValue1 변경에 따라 maxValue 재계산
+                          if (value2 > maxValue) {
+                            // sliderValue1에 의해 maxValue보다 sliderValue2가 큰 경우
+                            value2 = maxValue;
+                            formData.sliderValue2 = value2;
+                          }
+                        } else {
+                          value2 = value;
+                        }
+
+                        formData.sliderValue1 = value1;
+                        formData.sliderValue2 = value2;
+                      });
+                    },
+                    min: 0,
+                    max: index == 0 ? 10 : (maxValue >= 0 ? maxValue : 0),
+ // index에 따라 max 값을 설정
+                  ),
+                ),
+                Text(
+                  (numberOfSliders == 2)
+                      ? '${index == 0 ? "남자" : "여자"} 수: ${index == 0 ? value1
+                      .toStringAsFixed(0) : value2.toStringAsFixed(0)}'
+                      : '사람 수: ${value1.toStringAsFixed(0)}',
+                ),
+              ],
             ),
-            Text(
-              (numberOfSliders == 2)
-                  ? '${index == 0 ? "남자" : "여자"} 수: ${(index == 0 ? (formData.sliderValue1) : (formData.sliderValue2)).toStringAsFixed(0)}'
-                  : '사람 수: ${formData.sliderValue1.toStringAsFixed(0)}',
-            ),
-          ],
-        ),
-      ).toList(), // Add .toList() to convert the generated list to a list widget
+      ).toList(),
     );
   }
 }
