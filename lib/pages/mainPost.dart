@@ -41,11 +41,12 @@ class _RescuritPageState extends State<RescuritPage> {
       backgroundColor: AppColors.sub1Color,
       body: ListView(
         children: <Widget>[
+          /*     내가 만든 가치 list ! */
           buildGachiItem(context, gachiItems[1]),
           SizedBox(
             height: 10,
           ),
-          buildGachiItem(context, gachiItems[0]),
+          //buildGachiItem(context, gachiItems[0]),
           //buildGachiItem(context, gachiItems[2]),
           //buildGachiItem(context, gachiItems[3]),
           SizedBox(

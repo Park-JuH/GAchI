@@ -10,25 +10,20 @@ import 'colors.dart';
 * */
 
 Widget searchBox() {
-  return Column(
-    children: [
-      SizedBox(height: 30,),
-      Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20),
-        child: const TextField(
-          decoration: InputDecoration(
-            prefixIcon: Icon(Icons.search), //검색 아이콘 추가
-            contentPadding: EdgeInsets.all(5),
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(8),
-                ),
-                borderSide: BorderSide(color: Colors.black)),
-            hintText: '검색 키워드를 입력해주세요',
-          ),
-        ),
+  return Container(
+    margin: const EdgeInsets.symmetric(horizontal: 20),
+    child: const TextField(
+      decoration: InputDecoration(
+        prefixIcon: Icon(Icons.search), //검색 아이콘 추가
+        contentPadding: EdgeInsets.only(left: 5, bottom: 5, top: 5, right: 5),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(8),
+            ),
+            borderSide: BorderSide(color: Colors.black)),
+        hintText: '검색 키워드를 입력해주세요',
       ),
-    ],
+    ),
   );
 }
 
@@ -42,14 +37,73 @@ Widget gachiImage() {
   );
 }
 
-Widget appbar(){
+Widget appbar() {
   return Container(
-    height: 140,
+      decoration: const BoxDecoration(
+          color: Colors.grey,
+          borderRadius: BorderRadius.all(Radius.circular(50.0))),
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 50,
+          ),
+          Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                gachiImage(),
+                Container(
+                  margin: const EdgeInsets.only(top: 10),
+                  child: Row(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          elevation: 0,
+                          backgroundColor: Colors.black12,
+                          shape: RoundedRectangleBorder(
+                              //모서리를 둥글게
+                              borderRadius: BorderRadius.circular(20)),
+                        ),
+                        child: const Text(
+                          "내가치",
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      const Icon(
+                        Icons.notifications_none_rounded,
+                        color: Colors.black,
+                        size: 30,
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                    ],
+                  ),
+                ),
+              ]),
+          const SizedBox(
+            height: 40,
+          ),
+          searchBox(),
+          const SizedBox(
+            height: 30,
+          ),
+        ],
+      ));
+}
+
+/*  모집자 MainPage Appbar */
+Widget rescuritappbar() {
+  return Container(
+    height: 120,
     //color: Colors.yellow,
     child: Column(
       children: [
         const SizedBox(
-          height: 50,
+          height: 30,
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -66,7 +120,7 @@ Widget appbar(){
                       elevation: 0,
                       backgroundColor: AppColors.sub2Color,
                       shape: RoundedRectangleBorder(
-                        //모서리를 둥글게
+                          //모서리를 둥글게
                           borderRadius: BorderRadius.circular(20)),
                     ),
                     child: const Text(
@@ -75,11 +129,6 @@ Widget appbar(){
                   ),
                   const SizedBox(
                     width: 10,
-                  ),
-                  const Icon(
-                    Icons.notifications_none_rounded,
-                    color: Colors.black,
-                    size: 30,
                   ),
                   const SizedBox(
                     width: 10,
@@ -94,15 +143,13 @@ Widget appbar(){
   );
 }
 
-
-
 Widget profileAppbar(BuildContext context) {
   return Container(
-    height: 200,
+    height: 120,
     child: Column(
       children: [
         SizedBox(
-          height: 50,
+          height: 30,
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -124,8 +171,6 @@ Widget profileAppbar(BuildContext context) {
     ),
   );
 }
-
-
 Widget gachiDetailAppbar(BuildContext context) {
   return Container(
     height: 120,
