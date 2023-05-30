@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gachi/components/appbar.dart';
+import 'package:gachi/components/chatting/new_message.dart';
 
 class Chatting extends StatefulWidget {
   const Chatting({Key? key}) : super(key: key);
@@ -10,6 +12,13 @@ class Chatting extends StatefulWidget {
 class _ChattingState extends State<Chatting> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize:
+        Size.fromHeight(MediaQuery.of(context).size.height * 0.2),
+        child: appbar(),
+      ),
+      body: NewMessage(),
+    );
   }
 }

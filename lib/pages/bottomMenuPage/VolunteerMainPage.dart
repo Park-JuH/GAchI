@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gachi/components/appbar.dart';
+import 'package:gachi/components/colors.dart';
+import 'package:gachi/pages/mainPost2.dart';
 import 'package:gachi/pages/postDetail.dart';
 
 // 최종 편집 : 구도연
@@ -10,12 +12,12 @@ Widget listButton(String name) {
   String selectedDropdown = name;
   return Container(
     padding: const EdgeInsets.only(left: 7),
-    width: 60,
-    height: 30,
+    width: 65,
+    height: 38,
     decoration: BoxDecoration(
-        color: Colors.grey, borderRadius: BorderRadius.circular(20)),
+        color: AppColors.sub2Color, borderRadius: BorderRadius.circular(20)),
     child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
           child: DropdownButton(
@@ -26,7 +28,7 @@ Widget listButton(String name) {
                 value: item,
                 child: Text(
                   '$item',
-                  style: const TextStyle(fontSize: 14),
+                  style: const TextStyle(fontSize: 14, color: Colors.white),
                 ),
               );
             }).toList(),
@@ -46,18 +48,18 @@ Widget menu() {
       Container(
         width: 40,
         decoration:
-            const BoxDecoration(color: Colors.grey, shape: BoxShape.circle),
+            const BoxDecoration(color: AppColors.sub2Color, shape: BoxShape.circle),
         child: const Icon(
           Icons.refresh,
           color: Colors.white,
-          size: 28,
+          size: 30,
         ),
       ),
       listButton('날짜'),
       listButton('성별'),
       listButton('가치'),
-      Row(
-        children: const [
+      const Row(
+        children: [
           Icon(
             Icons.list_rounded,
             size: 30,
@@ -131,28 +133,39 @@ class _VolunteerMainPageState extends State<VolunteerMainPage> {
   @override
   Widget build(BuildContext context) {
     // getCurrentUserData();
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        appbar(),
-        const SizedBox(
-          width: 10,
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize:
+        Size.fromHeight(MediaQuery.of(context).size.height * 0.26),
+        child: Column(
+          children: [
+            appbar(),
+            searchBox(),
+            menu(),
+          ],
         ),
-        menu(),
-        Container(
-          width: double.infinity,
-          height: 500,
-          child: ListView(
-            children: [
-              post(context),
-              post(context),
-              post(context),
-              post(context),
-            ],
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            width: double.infinity,
+            height: 500,
+            child: ListView(
+              children: [
+                buildGachiItem(context, gachiItems[1]),
+                const SizedBox(
+                  height: 10,
+                ),
+                buildGachiItem(context, gachiItems[0]),
+                buildGachiItem(context, gachiItems[2]),
+                buildGachiItem(context, gachiItems[3]),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      )
     );
   }
 }

@@ -30,7 +30,6 @@ class _ProfilePageState extends State<ProfilePage> {
 }
 
 
-/**/
 class ProfileModify extends StatelessWidget {
   const ProfileModify({Key? key}) : super(key: key);
 

@@ -131,71 +131,80 @@ Widget buildGachiItem(BuildContext context, GachiItem gachiItem) {
         ),
       );
     },
-    child: Container(
-      height: screenHeight * 0.20,
-      // Provide a sufficient height for the Container
-      child: Stack(
-        children: [
-          Align(
-            alignment: Alignment.bottomCenter,
-            // Align the inner Container to the bottom
-            child: Container(
-              padding: const EdgeInsets.only(left: 20.0, right: 20),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: AppColors.box,
-              ),
-              height: screenHeight * 0.15,
-              width: screenWidth * 0.9,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-              Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(gachiItem.title, style: AppTextStyles.mainStyle),
-                  Heart()
-                ],
-              ),
-                  Container(
-                    margin: EdgeInsets.only(top: 5),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(gachiItem.category, style: AppTextStyles.sub1Style),
-                        SizedBox(width: 20),
-                        Container(
-                          padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-                          decoration: BoxDecoration(
-                            color: AppColors.box2,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Text(
-                            gachiItem.state,
-                            style: AppTextStyles.stateTextStyle,
-                          ),
-                        ),
-                        Spacer(),
-                        Text('3/4', style: AppTextStyles.sub1Style)
-                      ],
-                    ),
+    child: Column(
+      children: [
+        Container(
+          height: screenHeight * 0.18,
+          // Provide a sufficient height for the Container
+          child: Stack(
+            children: [
+              Align(
+                alignment: Alignment.bottomCenter,
+                // Align the inner Container to the bottom
+                child: Container(
+                  padding: const EdgeInsets.only(left: 20.0, right: 20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: AppColors.box,
                   ),
-                ],
+                  height: screenHeight * 0.15,
+                  width: screenWidth * 0.9,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                  Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(gachiItem.title, style: AppTextStyles.mainStyle),
+                      Heart()
+                    ],
+                  ),
+                      Container(
+                        margin: EdgeInsets.only(top: 5),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(gachiItem.category, style: AppTextStyles.sub1Style),
+                            SizedBox(width: 20),
+                            Container(
+                              padding:
+                              EdgeInsets.symmetric(horizontal: 10, vertical: 1),
+                              decoration: BoxDecoration(
+                                color: AppColors.box2,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Text(
+                                gachiItem.state,
+                                style: AppTextStyles.stateTextStyle,
+                              ),
+                            ),
+                            const Spacer(),
+                            const Text('3/4', style: AppTextStyles.sub1Style)
+                          ],
+                        ),
+                      ),
+
+                    ],
+                  ),
+                ),
               ),
-            ),
+              Positioned(
+                top: 0,
+                left: screenWidth / 2 - 40,
+                child: const CircleAvatar(
+                  backgroundImage: AssetImage('assets/images/gachi_logo.jpeg'),
+                  radius: 38,
+                ),
+              ),
+            ],
           ),
-          Positioned(
-            top: 0,
-            left: screenWidth / 2 - 40,
-            child: CircleAvatar(
-              backgroundImage: AssetImage('assets/images/gachi_logo.jpeg'),
-              radius: 38,
-            ),
-          ),
-        ],
-      ),
+        ),
+
+        const SizedBox(
+          height: 20,
+        )
+      ],
     ),
   );
 }

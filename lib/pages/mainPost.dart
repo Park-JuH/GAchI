@@ -35,8 +35,8 @@ class _RescuritPageState extends State<RescuritPage> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize:
-            Size.fromHeight(MediaQuery.of(context).size.height * 0.2),
-        child: rescuritappbar(),
+            Size.fromHeight(MediaQuery.of(context).size.height * 0.3),
+        child: appbar(),
       ),
       backgroundColor: AppColors.sub1Color,
       body: ListView(

@@ -33,7 +33,7 @@ class _InterestingState extends State<Interesting> {
       appBar: PreferredSize(
         preferredSize:
         Size.fromHeight(MediaQuery.of(context).size.height * 0.2),
-        child: rescuritappbar(),
+        child: appbar(),
       ),
       backgroundColor: AppColors.sub1Color,
       body: ListView(
