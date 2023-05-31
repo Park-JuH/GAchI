@@ -82,34 +82,26 @@ Widget nextBtn(BuildContext context, var next, var _textEditingController, var _
                   eval = 1;
                 }
               }
-              // if (eval != 1 && getGender(value) != 'Invalid ID') {
-              //   FirebaseAuth _auth = FirebaseAuth.instance;
-              //   FirebaseFirestore _firestore = FirebaseFirestore.instance;
-              //   UserCredential _credential = await _auth.signInAnonymously();
-              //   print(_credential.user);
-              //   await _firestore
-              //       .collection("Users")
-              //       .doc(_credential.user!.uid)
-              //       .set({
-              //     'nick': nickname,
-              //     'id': id,
-              //     'pw': pw,
-              //     'idCard': value,
-              //     'heart': 36,
-              //     "uid": _credential.user!.uid,
-              //     "isAnonymous": _credential.user!.isAnonymous,
-              //   });
-              //   Navigator.push(
-              //       context, MaterialPageRoute(builder: (context) => next));
-              // }
               if (eval != 1 && getGender(value) != 'Invalid ID') {
-                fireStore.collection('Users').doc(nickname).set({
-                  'nick': nickname,
-                  'id': id,
-                  'pw': pw,
-                  'idCard': value,
-                  'heart' : 36
-                });
+                final _authentication = FirebaseAuth.instance;
+                try {
+                  final newUser = await _authentication
+                      .createUserWithEmailAndPassword(
+                    email: id,
+                    password: pw,
+                  );
+                  fireStore.collection('Users').doc(newUser.user!.uid).set({
+                    'nick': nickname,
+                    'id': id,
+                    'pw': pw,
+                    'idCard': value,
+                    'heart' : 36
+                  });
+                  if (newUser.user != null) {
+                  }
+                } catch (e) {
+                  print(e);
+                }
                 Navigator.push(context, MaterialPageRoute(builder: (context)=> next));
               }
               else {
@@ -168,7 +160,6 @@ class _userAddFormState extends State<userAddForm> {
   TextEditingController _pwCheckController = TextEditingController();
   XFile? _image; //이미지를 담을 변수 선언
   final ImagePicker picker = ImagePicker(); //ImagePicker 초기화
-
   //이미지를 가져오는 함수
   Future getImage(ImageSource imageSource) async {
     //pickedFile에 ImagePicker로 가져온 이미지가 담긴다.

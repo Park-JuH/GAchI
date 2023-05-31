@@ -21,37 +21,37 @@ Widget profileImage() {
   );
 }
 
-Widget nickName() {
+Widget nickName(String nick) {
   return Container(
     margin: EdgeInsets.only(top: 10),
     child: Text(
-      '앵두', // 닉네임
+      nick, // 닉네임
       style: AppTextStyles.nicknameTextStyle,
     ),
   );
 }
 
-Widget profileBox(BuildContext context) {
+Widget profileBox(BuildContext context, String nick, double temperD) {
   return Column(
     children: [
       Container(
         child: Column(
           children: [
             profileImage(),
-            nickName(),
+            nickName(nick),
           ],
         ),
       ),
       // Divider(
       //   thickness: 1,
       // ),
-      profileOndo(context)
+      profileOndo(context, temperD)
     ],
   );
 }
 
-Widget profileOndo(BuildContext context) {
-  double tempValue = 0.7; // Change this based on your temperature value
+Widget profileOndo(BuildContext context, double temperD) {
+  double tempValue = temperD; // Change this based on your temperature value
 
   return Container(
     margin: EdgeInsets.only(top: 20),
