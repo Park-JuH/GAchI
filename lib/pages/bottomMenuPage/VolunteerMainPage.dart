@@ -1,12 +1,16 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gachi/components/appbar.dart';
+import 'package:gachi/components/button.dart';
 import 'package:gachi/components/colors.dart';
 import 'package:gachi/pages/mainPost2.dart';
 import 'package:gachi/pages/postDetail.dart';
 
-// 최종 편집 : 김지민
+// 최종 편집 : 구도연
+// 파베 관련 기능은 옆동네에서 가져옴. 리팩토링하면 좋을듯.
 Widget listButton(String name) {
   List<String> dropdownList = [name, '1', '2'];
   String selectedDropdown = name;
@@ -130,6 +134,52 @@ class VolunteerMainPage extends StatefulWidget {
 }
 
 class _VolunteerMainPageState extends State<VolunteerMainPage> {
+  late final StreamController<List<GachiItem>> _streamController;
+
+  @override
+  void initState() {
+    super.initState();
+    _streamController = StreamController();
+    fetchGachiItems();
+  }
+
+  @override
+  void dispose() {
+    _streamController.close();
+    super.dispose();
+  }
+
+  Future<void> fetchGachiItems() async {
+    final _authentication = FirebaseAuth.instance;
+    User? loggedUser;
+    try {
+      final user = _authentication.currentUser;
+      if (user != null) {
+        loggedUser = user;
+        print(loggedUser!.uid);
+      }
+    } catch (e) {
+      print(e);
+    }
+    QuerySnapshot usersSnapshot =
+    await FirebaseFirestore.instance.collection('Posts').get();
+    List<QueryDocumentSnapshot> userDocuments = usersSnapshot.docs;
+
+    List<GachiItem> gachiItems = [];
+    for (QueryDocumentSnapshot document in userDocuments) {
+      GachiItem newItem = GachiItem(
+          title: document['title'],
+          state: '모집 중',
+          category: document['category'],
+          index: 2,
+          group: document['group'],
+          uid: document['uid'],
+          gender: document['gender']);
+      gachiItems.add(newItem);
+    }
+    // add items to stream
+    _streamController.add(gachiItems);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -148,27 +198,45 @@ class _VolunteerMainPageState extends State<VolunteerMainPage> {
       ),
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              height: 390,
-              child: ListView(
-                children: [
-             //     buildGachiItem_Volumnteer(context, gachiItems[1]),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  // buildGachiItem_Volumnteer(context, gachiItems[0]),
-                  // buildGachiItem_Volumnteer(context, gachiItems[2]),
-                  // buildGachiItem_Volumnteer(context, gachiItems[3]),
-                ],
-              ),
+          children: [
+            StreamBuilder<List<GachiItem>>(
+              stream: _streamController.stream,
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                }
+
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                }
+
+                final gachiItems = snapshot.data ?? [];
+
+                if (gachiItems.isEmpty) {
+                  return Center(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.2),
+                          Text('얼른 가치를 만들어주세요! ')
+                        ],
+                      ));
+                }
+
+                return ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: gachiItems.length,
+                  itemBuilder: (context, index) {
+                    final item = gachiItems[index];
+                    return buildGachiItem(context, item);
+                  },
+                );
+              },
             ),
           ],
         ),
-      )
+      ),
     );
   }
 }
