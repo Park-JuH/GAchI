@@ -16,8 +16,6 @@ import 'colors.dart';
         },
 * */
 
-
-
 Widget button(String text, {VoidCallback? onPressed}) {
   return Align(
     alignment: Alignment.center,
@@ -26,7 +24,8 @@ Widget button(String text, {VoidCallback? onPressed}) {
         width: 240,
         height: 50,
         decoration: BoxDecoration(
-            color: AppColors.sub2Color, borderRadius: BorderRadius.circular(25),
+          color: AppColors.sub2Color,
+          borderRadius: BorderRadius.circular(25),
         ),
         child: TextButton(
           onPressed: onPressed,
@@ -34,12 +33,12 @@ Widget button(String text, {VoidCallback? onPressed}) {
             primary: Colors.white, // This sets the text color
           ),
           child: Center(child: Text(text)),
-        )
-    ),
+        )),
   );
 }
 
-Widget pinButton(BuildContext context, String text, String route, {VoidCallback? onPressed}) {
+Widget pinButton(BuildContext context, String text, String route,
+    {VoidCallback? onPressed}) {
   return Align(
     alignment: Alignment.center,
     child: Container(
@@ -65,7 +64,8 @@ Widget pinButton(BuildContext context, String text, String route, {VoidCallback?
 }
 
 // 모집자 메인 화면 '가치만들기 button'
-Widget gachiMakeButton(BuildContext context, String text, String route, {VoidCallback? onPressed}){
+Widget gachiMakeButton(BuildContext context, String text, String route,
+    {VoidCallback? onPressed}) {
   return Align(
     alignment: Alignment.center,
     child: Container(
@@ -73,7 +73,8 @@ Widget gachiMakeButton(BuildContext context, String text, String route, {VoidCal
         width: 250,
         height: 50,
         decoration: BoxDecoration(
-            color: AppColors.sub2Color, borderRadius: BorderRadius.circular(25)),
+            color: AppColors.sub2Color,
+            borderRadius: BorderRadius.circular(25)),
         child: TextButton(
           onPressed: () {
             Navigator.pushNamed(context, route);
@@ -85,12 +86,12 @@ Widget gachiMakeButton(BuildContext context, String text, String route, {VoidCal
             primary: Colors.white, // This sets the text color
           ),
           child: Center(child: Text(text)),
-        )
-    ),
+        )),
   );
 }
 
-Widget categoriesButtons(BuildContext context, {Function(String)? onRadioButtonChanged}) {
+Widget categoriesButtons(BuildContext context,
+    {Function(String)? onRadioButtonChanged}) {
   return CustomRadioButton(
     elevation: 1.0,
     absoluteZeroSpacing: false,
@@ -113,8 +114,9 @@ Widget categoriesButtons(BuildContext context, {Function(String)? onRadioButtonC
   );
 }
 
-Widget registerbutton(BuildContext context, String text, String route, {VoidCallback? onPressed}) {
-  FirebaseFirestore fireStore=FirebaseFirestore.instance;
+Widget registerbutton(BuildContext context, String text, String route,
+    {VoidCallback? onPressed}) {
+  FirebaseFirestore fireStore = FirebaseFirestore.instance;
   return Align(
     alignment: Alignment.center,
     child: Container(
@@ -122,7 +124,8 @@ Widget registerbutton(BuildContext context, String text, String route, {VoidCall
         width: 210,
         height: 45,
         decoration: BoxDecoration(
-          color: AppColors.sub2Color, borderRadius: BorderRadius.circular(25),
+          color: AppColors.sub2Color,
+          borderRadius: BorderRadius.circular(25),
         ),
         child: TextButton(
           onPressed: () {
@@ -138,16 +141,17 @@ Widget registerbutton(BuildContext context, String text, String route, {VoidCall
           style: TextButton.styleFrom(
             primary: Colors.white, // This sets the text color
           ),
-          child: Center(child: Text(text,style: TextStyle(fontSize: 18,color: Colors.white),)),
-        )
-    ),
+          child: Center(
+              child: Text(
+            text,
+            style: TextStyle(fontSize: 18, color: Colors.white),
+          )),
+        )),
   );
 }
 
-
 /*               프로필 버튼 페이지  */
-Widget profileModify_button(BuildContext context, String text, String route,
-    {VoidCallback? onPressed}) {
+Widget profileModify_button(BuildContext context, String text, String route, {VoidCallback? onPressed}) {
   double screenWidth = MediaQuery.of(context).size.width;
   double buttonWidth = screenWidth * 0.20; // 버튼 넓이
   return Align(
@@ -176,7 +180,9 @@ Widget profileModify_button(BuildContext context, String text, String route,
   );
 }
 
-Widget loginbutton(BuildContext context, String text, String route, String username, String password, {VoidCallback? onPressed}) {
+Widget loginbutton(BuildContext context, String text, String route,
+    String username, String password,
+    {VoidCallback? onPressed}) {
   return Align(
     alignment: Alignment.center,
     child: Container(
@@ -184,10 +190,12 @@ Widget loginbutton(BuildContext context, String text, String route, String usern
         width: 210,
         height: 45,
         decoration: BoxDecoration(
-          color: AppColors.sub2Color, borderRadius: BorderRadius.circular(25),
+          color: AppColors.sub2Color,
+          borderRadius: BorderRadius.circular(25),
         ),
         child: TextButton(
-          onPressed: () {/*
+          onPressed: () {
+            /*
           async {
             int id_pw = 0;
             QuerySnapshot usersSnapshot = await FirebaseFirestore.instance.collection('Users').get();
@@ -215,8 +223,11 @@ Widget loginbutton(BuildContext context, String text, String route, String usern
           style: TextButton.styleFrom(
             primary: Colors.white, // This sets the text color
           ),
-          child: Center(child: Text(text,style: TextStyle(fontSize: 18,color: Colors.white),)),
-        )
-    ),
+          child: Center(
+              child: Text(
+            text,
+            style: TextStyle(fontSize: 18, color: Colors.white),
+          )),
+        )),
   );
 }

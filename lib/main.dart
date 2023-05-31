@@ -8,9 +8,10 @@ import 'package:gachi/pages/loginMain.dart';
 import 'package:gachi/pages/mainPost.dart';
 import 'package:gachi/pages/bottomMenuPage/profileMain.dart';
 import 'package:gachi/pages/makeGachi.dart';
-//import 'package:gachi/pages/settingsMain.dart';
 import 'package:gachi/pages/userAdd/userAdd.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
+import 'package:gachi/pages/userAdd/gachiForm.dart';
 
 var heart = false;
 int pageNum = 0;
@@ -21,7 +22,12 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => FormData(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -39,12 +45,11 @@ class MyApp extends StatelessWidget {
       initialRoute: '/loginHome',
       routes: {
         '/':(context)=>const MyHomePage(title: 'Flutter Demo Home Page' ),
-        '/makeGachi':(context) => const MakeGachi(),
+        '/makeGachi':(context) =>  MakeGachi(),
         '/recurit':(context)=> const RescuritPage(),
         '/loginHome':(context)=> const LoginMainPage(),
         '/login':(context)=> const LoginMainPage(),
         '/profile':(context)=> const ProfilePage(),
-        //'/settings':(context)=> const SettingsPage(),
         '/profileModify':(context)=> const ProfileModify(),
         '/register':(context)=> const NickName(),
         //  '/regiseter':(context)=>(), 여기에 회원가입 페이지추가하면 돼요.

@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_onboarding_slider/flutter_onboarding_slider.dart';
-
+import 'package:provider/provider.dart';
+import 'package:gachi/pages/userAdd/gachiForm.dart';
 import 'mainPost.dart';
 import 'makeGachi2.dart';
 
@@ -23,42 +24,56 @@ import 'makeGachi2.dart';
 *
 * */
 
+const kDarkBlueColor = Color(0xFF053149);
+const kBackgroundImagePath = 'assets/images/dog2.png';
+const kTotalPages = 3;
+const kPageBackgroundColor = Colors.white;
+const kHeaderBackgroundColor = Colors.white;
+const kControllerColor = kDarkBlueColor;
+
 class MakeGachi extends StatelessWidget {
-  final Color kDarkBlueColor = const Color(0xFF053149);
-
-  const MakeGachi({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return OnBoardingSlider(
       finishButtonText: '가치만들기',
       finishButtonStyle: FinishButtonStyle(
         backgroundColor: Colors.green,
-
       ),
-      onFinish: () {
-        Navigator.push(
-          context,
-          CupertinoPageRoute(
-            builder: (context) => const RescuritPage(),
-          ),
-        );
-      },
-      background: [
-        Image.asset('assets/images/dog2.png', height: 0),
-        Image.asset('assets/images/dog2.png', height: 0),
-        Image.asset('assets/images/dog2.png', height: 0),
-      ],
-      controllerColor: kDarkBlueColor,
-      totalPage: 3,
-      headerBackgroundColor: Colors.white,
-      pageBackgroundColor: Colors.white,
+      onFinish: _navigateToRecruitPage,
+      background: List.filled(kTotalPages, Image.asset(kBackgroundImagePath, height: 0)),
+      controllerColor: kControllerColor,
+      totalPage: kTotalPages,
+      headerBackgroundColor: kHeaderBackgroundColor,
+      pageBackgroundColor: kPageBackgroundColor,
       speed: 1.8,
       pageBodies: [
-        Select_Category(),
-        SafeArea(child: Select_Detail(),),
-        SafeArea(child :Last_Step(), ),
+        SafeAreaChild(Select_Category()),
+        SafeAreaChild(Select_Detail()),
+        SafeAreaChild(Last_Step()),
       ],
     );
+  }
+
+  void _navigateToRecruitPage(BuildContext context) {
+    FormData formData = Provider.of<FormData>(context, listen: false);
+
+    // formdata를 파이어베이스에 보내면 됩니다!
+    Navigator.push(
+      context,
+      CupertinoPageRoute(
+        builder: (context) =>  RescuritPage(),    // 모집자 메인화면
+      ),
+    );
+  }
+}
+
+class SafeAreaChild extends StatelessWidget {
+  final Widget child;
+
+  const SafeAreaChild(this.child, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(child: child);
   }
 }

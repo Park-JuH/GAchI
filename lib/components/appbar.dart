@@ -5,8 +5,8 @@ import 'colors.dart';
 
 // 메인 화면의 같은 색 상단 부분을 지정하는 코드입니다.
 /*
-* 수정일 : 0508
-* 수정자 : 구도연
+* 수정일 : 0530
+* 수정자 : 김지민^^
 * */
 
 Widget searchBox() {
@@ -95,14 +95,61 @@ Widget appbar(){
 }
 
 
+/*  모집자 MainPage Appbar */
+Widget rescuritappbar() {
+  return Container(
+    height: 120,
+    //color: Colors.yellow,
+    child: Column(
+      children: [
+        const SizedBox(
+          height: 30,
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            gachiImage(),
+            Container(
+              margin: const EdgeInsets.only(top: 10),
+              child: Row(
+                children: [
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      elevation: 0,
+                      backgroundColor: AppColors.sub2Color,
+                      shape: RoundedRectangleBorder(
+                          //모서리를 둥글게
+                          borderRadius: BorderRadius.circular(20)),
+                    ),
+                    child: const Text(
+                      "내가치",
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ],
+    ),
+  );
+}
 
 Widget profileAppbar(BuildContext context) {
   return Container(
-    height: 200,
+    height: 200,        //  지민 화면 : 120
     child: Column(
       children: [
         SizedBox(
-          height: 50,
+          height: 50,   // 지민 화면 :30
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -126,7 +173,7 @@ Widget profileAppbar(BuildContext context) {
 }
 
 
-Widget gachiDetailAppbar(BuildContext context) {
+Widget gachiDetailAppbar(BuildContext context, String text, String path) {
   return Container(
     height: 120,
     child: Column(
@@ -155,7 +202,7 @@ Widget gachiDetailAppbar(BuildContext context) {
               ),
             ),
             Container(
-                child: profileModify_button(context, '가치 수정', '/profileModify')
+                child: profileModify_button(context, text, path)
             ),
           ],
         ),

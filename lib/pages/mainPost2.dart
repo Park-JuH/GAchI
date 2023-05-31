@@ -152,14 +152,14 @@ Widget buildGachiItem(BuildContext context, GachiItem gachiItem) {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                  Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(gachiItem.title, style: AppTextStyles.mainStyle),
-                      Heart()
-                    ],
-                  ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(gachiItem.title, style: AppTextStyles.mainStyle),
+                          Heart()
+                        ],
+                      ),
                       Container(
                         margin: EdgeInsets.only(top: 5),
                         child: Row(
