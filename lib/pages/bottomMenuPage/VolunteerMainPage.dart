@@ -136,7 +136,7 @@ class _VolunteerMainPageState extends State<VolunteerMainPage> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize:
-        Size.fromHeight(MediaQuery.of(context).size.height * 0.26),
+        Size.fromHeight(MediaQuery.of(context).size.height * 0.31),
         child: Column(
           children: [
             appbar(),
@@ -145,26 +145,28 @@ class _VolunteerMainPageState extends State<VolunteerMainPage> {
           ],
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Container(
-            width: double.infinity,
-            height: 500,
-            child: ListView(
-              children: [
-                buildGachiItem(context, gachiItems[1]),
-                const SizedBox(
-                  height: 10,
-                ),
-                buildGachiItem(context, gachiItems[0]),
-                buildGachiItem(context, gachiItems[2]),
-                buildGachiItem(context, gachiItems[3]),
-              ],
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              width: double.infinity,
+              height: 390,
+              child: ListView(
+                children: [
+                  buildGachiItem(context, gachiItems[1]),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  buildGachiItem(context, gachiItems[0]),
+                  buildGachiItem(context, gachiItems[2]),
+                  buildGachiItem(context, gachiItems[3]),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       )
     );
   }

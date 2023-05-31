@@ -12,7 +12,6 @@ import 'colors.dart';
 Widget searchBox() {
   return Column(
     children: [
-      SizedBox(height: 30,),
       Container(
         margin: const EdgeInsets.symmetric(horizontal: 20),
         child: const TextField(
@@ -44,13 +43,9 @@ Widget gachiImage() {
 
 Widget appbar(){
   return Container(
-    height: 140,
     //color: Colors.yellow,
     child: Column(
       children: [
-        const SizedBox(
-          height: 50,
-        ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -98,13 +93,9 @@ Widget appbar(){
 /*  모집자 MainPage Appbar */
 Widget rescuritappbar() {
   return Container(
-    height: 120,
     //color: Colors.yellow,
     child: Column(
       children: [
-        const SizedBox(
-          height: 30,
-        ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -145,12 +136,8 @@ Widget rescuritappbar() {
 
 Widget profileAppbar(BuildContext context) {
   return Container(
-    height: 200,        //  지민 화면 : 120
     child: Column(
       children: [
-        SizedBox(
-          height: 50,   // 지민 화면 :30
-        ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

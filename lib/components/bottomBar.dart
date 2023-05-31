@@ -90,11 +90,7 @@ class _BottomBarState extends State<BottomBar> {
   dynamic selected;
   double count = 0;
 
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
+
 
   @override
   Widget build(BuildContext context) {

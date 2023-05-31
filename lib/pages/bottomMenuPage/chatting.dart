@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gachi/components/appbar.dart';
+import 'package:gachi/components/chatting/message.dart';
 import 'package:gachi/components/chatting/new_message.dart';
 
 class Chatting extends StatefulWidget {
@@ -21,7 +22,7 @@ class _ChattingState extends State<Chatting> {
       body: Container(
         child: Column(
           children: [
-            Expanded(child: Text("Hi, there!")), //Messages()),
+            Expanded(child: Messages()),
             Column(
               children: [
                 NewMessage(),

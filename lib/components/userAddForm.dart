@@ -44,7 +44,7 @@ Widget nextBtn(BuildContext context, var next, var _textEditingController, var _
             print(value);
             int eval = 0;
             if (pageNum == 0) {
-              QuerySnapshot usersSnapshot = await FirebaseFirestore.instance.collection('Users').get();
+              /*QuerySnapshot usersSnapshot = await FirebaseFirestore.instance.collection('Users').get();
               List<QueryDocumentSnapshot> userDocuments = usersSnapshot.docs;
 
               for (QueryDocumentSnapshot document in userDocuments) {
@@ -52,7 +52,7 @@ Widget nextBtn(BuildContext context, var next, var _textEditingController, var _
                   print('중복된 닉네임');
                   eval = 1;
                 }
-              }
+              }*/
               if (eval != 1) {
                 nickname = value;
                 Navigator.push(context, MaterialPageRoute(builder: (context)=> next));
@@ -186,116 +186,117 @@ class _userAddFormState extends State<userAddForm> {
     String hint = widget.hint;
     int limit = widget.limit;
     var next = widget.next;
-
-
+    
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            children: [
-              const SizedBox(height: 40,),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                height: 100,
-                child: Row(
-                  children: [
-                    InkWell(
-                      onTap: (){
-                        Navigator.pop(context);
-                      },
-                      child: const Icon(Icons.arrow_back_ios_new_rounded),),
-                    Text(
-                      title,
-                      style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w800),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          Container(
-              margin: const EdgeInsets.symmetric(horizontal: 30),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  pageNum == 4 ?
-                  Column(
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              children: [
+                const SizedBox(height: 10,),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  height: 100,
+                  child: Row(
                     children: [
-                      _image != null
-                          ? Container(
-                        width: 300,
-                        height: 300,
-                        child: Image.file(File(_image!.path)), //가져온 이미지를 화면에 띄워주는 코드
-                      )
-                          : Container(
-                        width: 300,
-                        height: 300,
-                        color: Colors.grey,
+                      InkWell(
+                        onTap: (){
+                          Navigator.pop(context);
+                        },
+                        child: const Icon(Icons.arrow_back_ios_new_rounded),),
+                      Text(
+                        title,
+                        style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w800),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                primary: Color(0xFFEF8C00),
-                                elevation: 0
-                            ),
-                            onPressed: () {
-                              getImage(ImageSource.camera); //getImage 함수를 호출해서 카메라로 찍은 사진 가져오기
-                            },
-                            child: const Text("카메라"),
-                          ),
-                          const SizedBox(width: 30),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                primary: Color(0xFFEF8C00),
-                                elevation: 0
-                            ),
-                            onPressed: () {
-                              getImage(ImageSource.gallery); //getImage 함수를 호출해서 갤러리에서 사진 가져오기
-                            },
-                            child: const Text("갤러리"),
-                          ),
-                        ],
-                      ),
-                    ],
-                  )
-                      : input(_textEditingController, limit, pageNum, hint),
-                  Text(text),
-                  const SizedBox(height: 20,),
-                  pageNum != 2 ? const SizedBox(height: 0,) :
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      input(_pwCheckController, limit, pageNum, hint),
-                      const Text('비밀번호를 다시 입력해주세요'),
-                      const SizedBox(height: 30,)
                     ],
                   ),
-                  pageNum == 1 ? Row(children: [
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: const Color(0xFFEF8C00),
-                            elevation: 0
+                ),
+              ],
+            ),
+            SizedBox(
+              height: pageNum != 2 ? MediaQuery.of(context).size.height * 0.2 : MediaQuery.of(context).size.height * 0.15
+            ),
+            Container(
+                margin: const EdgeInsets.symmetric(horizontal: 30),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    pageNum == 4 ?
+                    Column(
+                      children: [
+                        _image != null
+                            ? Container(
+                          width: 300,
+                          height: 300,
+                          child: Image.file(File(_image!.path)), //가져온 이미지를 화면에 띄워주는 코드
+                        )
+                            : Container(
+                          width: 300,
+                          height: 300,
+                          color: Colors.grey,
                         ),
-                        onPressed: (){
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  primary: Color(0xFFEF8C00),
+                                  elevation: 0
+                              ),
+                              onPressed: () {
+                                getImage(ImageSource.camera); //getImage 함수를 호출해서 카메라로 찍은 사진 가져오기
+                              },
+                              child: const Text("카메라"),
+                            ),
+                            const SizedBox(width: 30),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  primary: Color(0xFFEF8C00),
+                                  elevation: 0
+                              ),
+                              onPressed: () {
+                                getImage(ImageSource.gallery); //getImage 함수를 호출해서 갤러리에서 사진 가져오기
+                              },
+                              child: const Text("갤러리"),
+                            ),
+                          ],
+                        ),
+                      ],
+                    )
+                        : input(_textEditingController, limit, pageNum, hint),
+                    Text(text),
+                    const SizedBox(height: 20,),
+                    pageNum != 2 ? const SizedBox(height: 0,) :
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        input(_pwCheckController, limit, pageNum, hint),
+                        const Text('비밀번호를 다시 입력해주세요'),
+                        const SizedBox(height: 30,)
+                      ],
+                    ),
+                    pageNum == 1 ? Row(children: [
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: const Color(0xFFEF8C00),
+                              elevation: 0
+                          ),
+                          onPressed: (){
 
-                        }, child: const Text('중복확인')),
-                    const SizedBox(width: 30,),
+                          }, child: const Text('중복확인')),
+                      const SizedBox(width: 30,),
+                      nextBtn(context, next, _textEditingController, _pwCheckController, pageNum)
+                    ],) :
                     nextBtn(context, next, _textEditingController, _pwCheckController, pageNum)
-                  ],) :
-                  nextBtn(context, next, _textEditingController, _pwCheckController, pageNum)
-                ],
-              )
-          ),
-          const SizedBox(
-            height: 0,
-          ),
-          const SizedBox(
-            height: 0,
-          ),
-        ],
+                  ],
+                )
+            ),
+            const SizedBox(
+              height: 0,
+            ),
+          ],
+        ),
       ),
     );
   }

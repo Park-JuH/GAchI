@@ -44,38 +44,40 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyA4TCa84P0blOJv2HnaUMEZDQvsltbha6A',
-    appId: '1:878351682851:web:919f1c81fa4fe79cf79096',
-    messagingSenderId: '878351682851',
-    projectId: 'gachi-27bfd',
-    authDomain: 'gachi-27bfd.firebaseapp.com',
-    storageBucket: 'gachi-27bfd.appspot.com',
-    measurementId: 'G-94Y9LQ95V3',
+    apiKey: 'AIzaSyBMFLli5bWeH7iBr9QHmSWyc1ugQ_8lU-8',
+    appId: '1:1008750887664:web:8e429885cd3c2d693d3835',
+    messagingSenderId: '1008750887664',
+    projectId: 'mp-gachi',
+    authDomain: 'mp-gachi.firebaseapp.com',
+    storageBucket: 'mp-gachi.appspot.com',
+    measurementId: 'G-WDV1FWX05K',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDXohqXq8mThmn_gUOfAttWKwPcurMpAo4',
-    appId: '1:878351682851:android:bd09f5124d291d80f79096',
-    messagingSenderId: '878351682851',
-    projectId: 'gachi-27bfd',
-    storageBucket: 'gachi-27bfd.appspot.com',
+    apiKey: 'AIzaSyCLwBPr00Zgsbz1RCNDk3rBI1emuasM8b0',
+    appId: '1:1008750887664:android:95b1fbfef29ff04f3d3835',
+    messagingSenderId: '1008750887664',
+    projectId: 'mp-gachi',
+    storageBucket: 'mp-gachi.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBf78WjYRkJH2P8eJ6qbW8KpRqo64Zv7W8',
-    appId: '1:878351682851:ios:2ee605fde5fd5a3af79096',
-    messagingSenderId: '878351682851',
-    projectId: 'gachi-27bfd',
-    storageBucket: 'gachi-27bfd.appspot.com',
+    apiKey: 'AIzaSyARYcgO1EhLRDo8ji4_Ns3MYV_fvnTnaik',
+    appId: '1:1008750887664:ios:9891f010551ada333d3835',
+    messagingSenderId: '1008750887664',
+    projectId: 'mp-gachi',
+    storageBucket: 'mp-gachi.appspot.com',
+    iosClientId: '1008750887664-nebi8f5brr905f4rvji0m7fn05menm8k.apps.googleusercontent.com',
     iosBundleId: 'com.example.gachi',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBf78WjYRkJH2P8eJ6qbW8KpRqo64Zv7W8',
-    appId: '1:878351682851:ios:2ee605fde5fd5a3af79096',
-    messagingSenderId: '878351682851',
-    projectId: 'gachi-27bfd',
-    storageBucket: 'gachi-27bfd.appspot.com',
+    apiKey: 'AIzaSyARYcgO1EhLRDo8ji4_Ns3MYV_fvnTnaik',
+    appId: '1:1008750887664:ios:9891f010551ada333d3835',
+    messagingSenderId: '1008750887664',
+    projectId: 'mp-gachi',
+    storageBucket: 'mp-gachi.appspot.com',
+    iosClientId: '1008750887664-nebi8f5brr905f4rvji0m7fn05menm8k.apps.googleusercontent.com',
     iosBundleId: 'com.example.gachi',
   );
 }

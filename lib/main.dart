@@ -17,7 +17,9 @@ var heart = false;
 int pageNum = 0;
 int postNum = 0;
 
-PageController controller = PageController();
+PageController controller = PageController(
+  initialPage: 0
+);
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -76,18 +78,26 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView(
-        controller: controller,
-        children: [
-          Center(
-              child: pageNum == 0 ? VolunteerMainPage() : RescuritPage()
-          ),
-          Center(child: Interesting()),
-          Center(child: Chatting()),
-          Center(child: ProfilePage()),
-        ],
+      body: SafeArea(
+        child: PageView(
+          controller: controller,
+          children: [
+            Center(
+              child: VolunteerMainPage(),
+            ),
+            Center(child: Interesting()),
+            Center(child: Chatting()),
+            Center(child: ProfilePage()),
+          ],
+        ),
       ),
       extendBody: true,
       bottomNavigationBar: const BottomBar(),

@@ -66,10 +66,10 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize:
-        Size.fromHeight(MediaQuery.of(context).size.height * 0.2),
+        Size.fromHeight(MediaQuery.of(context).size.height * 0.15),
         child: profileAppbar(context),
       ),
-      body: Column(
+      body: ListView(
         children: [
           profileBox(context, nick, temperD),
           profileBox2(),

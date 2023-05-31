@@ -1,26 +1,43 @@
 {
   "project_info": {
-    "project_number": "878351682851",
-    "project_id": "gachi-27bfd",
-    "storage_bucket": "gachi-27bfd.appspot.com"
+    "project_number": "1008750887664",
+    "project_id": "mp-gachi",
+    "storage_bucket": "mp-gachi.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:878351682851:android:bd09f5124d291d80f79096",
+        "mobilesdk_app_id": "1:1008750887664:android:95b1fbfef29ff04f3d3835",
         "android_client_info": {
           "package_name": "com.example.gachi"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1008750887664-dtd85m8v27s1sj9ra0mq50jagavb6h22.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyDXohqXq8mThmn_gUOfAttWKwPcurMpAo4"
+          "current_key": "AIzaSyCLwBPr00Zgsbz1RCNDk3rBI1emuasM8b0"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1008750887664-dtd85m8v27s1sj9ra0mq50jagavb6h22.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1008750887664-nebi8f5brr905f4rvji0m7fn05menm8k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.gachi"
+              }
+            }
+          ]
         }
       }
     }
