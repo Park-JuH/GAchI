@@ -39,7 +39,7 @@ class MakeGachi extends StatelessWidget {
       finishButtonStyle: FinishButtonStyle(
         backgroundColor: Colors.green,
       ),
-      onFinish: _navigateToRecruitPage,
+      onFinish: () => _navigateToRecruitPage(context),
       background: List.filled(kTotalPages, Image.asset(kBackgroundImagePath, height: 0)),
       controllerColor: kControllerColor,
       totalPage: kTotalPages,
