@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'colors.dart';
@@ -183,6 +184,7 @@ Widget profileModify_button(BuildContext context, String text, String route, {Vo
 Widget loginbutton(BuildContext context, String text, String route,
     String username, String password,
     {VoidCallback? onPressed}) {
+  final _authentication = FirebaseAuth.instance;
   return Align(
     alignment: Alignment.center,
     child: Container(
@@ -194,9 +196,7 @@ Widget loginbutton(BuildContext context, String text, String route,
           borderRadius: BorderRadius.circular(25),
         ),
         child: TextButton(
-          onPressed: () {
-            /*
-          async {
+          onPressed: () async {
             int id_pw = 0;
             QuerySnapshot usersSnapshot = await FirebaseFirestore.instance.collection('Users').get();
             List<QueryDocumentSnapshot> userDocuments = usersSnapshot.docs;
@@ -205,20 +205,33 @@ Widget loginbutton(BuildContext context, String text, String route,
               if (document['id'] == username) {
                 id_pw += 1;
                 if (document['pw'] == password) {
-                  Navigator.pushNamed(context, route);
+                  id_pw += 1;
+                  try {
+                    final newUser = await _authentication
+                        .signInWithEmailAndPassword(
+                      email: username,
+                      password: password,
+                    );
+                    if (newUser.user != null) {
+                      Navigator.pushNamed(context, route);
+                        }
+                    } catch (e) {
+                    print(e);
+                  }
                 }
               }
             }
             if (id_pw == 0){
               print("올바르지 않은 id 입니다.");
             }
-            else {
+            else if (id_pw == 1) {
               print('비밀번호가 올바르지 않습니다');
-            }*/
-            Navigator.pushNamed(context, route);
+            }
+            // Navigator.pushNamed(context, route);
             if (onPressed != null) {
               onPressed();
             }
+            // Navigator.pushNamed(context, route);
           },
           style: TextButton.styleFrom(
             primary: Colors.white, // This sets the text color
