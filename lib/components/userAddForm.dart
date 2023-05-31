@@ -44,7 +44,7 @@ Widget nextBtn(BuildContext context, var next, var _textEditingController, var _
             print(value);
             int eval = 0;
             if (pageNum == 0) {
-              /*QuerySnapshot usersSnapshot = await FirebaseFirestore.instance.collection('Users').get();
+              QuerySnapshot usersSnapshot = await FirebaseFirestore.instance.collection('Users').get();
               List<QueryDocumentSnapshot> userDocuments = usersSnapshot.docs;
 
               for (QueryDocumentSnapshot document in userDocuments) {
@@ -52,7 +52,7 @@ Widget nextBtn(BuildContext context, var next, var _textEditingController, var _
                   print('중복된 닉네임');
                   eval = 1;
                 }
-              }*/
+              }
               if (eval != 1) {
                 nickname = value;
                 Navigator.push(context, MaterialPageRoute(builder: (context)=> next));
@@ -109,7 +109,10 @@ Widget nextBtn(BuildContext context, var next, var _textEditingController, var _
               }
 
             }
-            // Navigator.push(context, MaterialPageRoute(builder: (context)=> next));
+          }
+          else {
+            print(context);
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> next));
           }
         }
       },

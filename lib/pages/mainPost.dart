@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gachi/components/colors.dart';
 
@@ -32,23 +34,35 @@ class _RescuritPageState extends State<RescuritPage> {
 
   /* 이 함 수 안에 data 가져오면 되는듯.  */
   Future<void> fetchGachiItems() async {
-    List<GachiItem> gachiItems = [
-      /* 이건 예시 하드코딩 된 값 */
-      GachiItem(title: '모집자 테스트',
-          state: '모집 중',
-          category: '스터디',
-          index: 2,
-          group: 2,
-          uid: 'UID 2',
-          gender: 'Gender 2'),
-      GachiItem(title: '모집자 테스트',
-          state: '모집 중',
-          category: '스터디',
-          index: 2,
-          group: 2,
-          uid: 'UID 2',
-          gender: 'Gender 2'),
-    ];
+    final _authentication = FirebaseAuth.instance;
+    User? loggedUser;
+    try {
+      final user = _authentication.currentUser;
+      if (user != null) {
+        loggedUser = user;
+        print(loggedUser!.uid);
+      }
+    } catch (e) {
+      print(e);
+    }
+    QuerySnapshot usersSnapshot = await FirebaseFirestore.instance.collection('Posts').get();
+    List<QueryDocumentSnapshot> userDocuments = usersSnapshot.docs;
+
+    List<GachiItem> gachiItems = [];
+    for (QueryDocumentSnapshot document in userDocuments) {
+      if (document['uid'] == loggedUser!.uid) {
+        GachiItem newItem = GachiItem(
+            title: document['title'],
+            state: '모집 중',
+            category: document['category'],
+            index: 2,
+            group: document['group'],
+            uid: document['uid'],
+            gender: document['gender']
+        );
+        gachiItems.add(newItem);
+      }
+    }
     // add items to stream
     _streamController.add(gachiItems);
   }
