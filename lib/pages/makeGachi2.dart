@@ -16,6 +16,7 @@ import 'package:gachi/pages/userAdd/gachiForm.dart';
 class Select_Category extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    FormData formData = Provider.of<FormData>(context);
     return SafeArea(
       child: SingleChildScrollView(
         child: Column(
@@ -48,6 +49,7 @@ class Select_Category extends StatelessWidget {
                     child: categoriesButtons(context,
                         onRadioButtonChanged: (category) {
                           print(category);
+                          formData.updateCategory(category);
                         }),
                   )
                 ],

@@ -57,7 +57,8 @@ class MakeGachi extends StatelessWidget {
   void _navigateToRecruitPage(BuildContext context) {
     FormData formData = Provider.of<FormData>(context, listen: false);
     print('Recruit');
-    print(formData);
+    print(formData.category);
+    print(formData.sliderValue1);
     // formdata를 파이어베이스에 보내면 됩니다!
     Navigator.push(
       context,

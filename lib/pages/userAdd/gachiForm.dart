@@ -14,7 +14,7 @@ class FormData extends ChangeNotifier {
   String title = '';
   String body = '';
 
-  //
+
   void updateSelectedGender(String newSelectedGender) {
     selectedGender = newSelectedGender;
     notifyListeners();

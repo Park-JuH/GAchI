@@ -109,7 +109,7 @@ Widget categoriesButtons(BuildContext context,
       textStyle: TextStyle(fontSize: 16),
     ),
     radioButtonValue: (categori) {
-      print(categori); // categori 출력
+      onRadioButtonChanged?.call(categori);  // 변경점: 카테고리 변경 콜백 호출
     },
     selectedColor: AppColors.mainColor,
   );
