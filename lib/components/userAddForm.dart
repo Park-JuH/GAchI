@@ -94,7 +94,7 @@ Widget nextBtn(BuildContext context, var next, var _textEditingController, var _
                     'nick': nickname,
                     'id': id,
                     'pw': pw,
-                    'idCard': value,
+                    'idCard': getGender(value),
                     'heart' : 36
                   });
                   if (newUser.user != null) {
