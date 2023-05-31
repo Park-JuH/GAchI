@@ -155,13 +155,13 @@ class _VolunteerMainPageState extends State<VolunteerMainPage> {
               height: 390,
               child: ListView(
                 children: [
-                  buildGachiItem(context, gachiItems[1]),
+             //     buildGachiItem_Volumnteer(context, gachiItems[1]),
                   const SizedBox(
                     height: 10,
                   ),
-                  buildGachiItem(context, gachiItems[0]),
-                  buildGachiItem(context, gachiItems[2]),
-                  buildGachiItem(context, gachiItems[3]),
+                  // buildGachiItem_Volumnteer(context, gachiItems[0]),
+                  // buildGachiItem_Volumnteer(context, gachiItems[2]),
+                  // buildGachiItem_Volumnteer(context, gachiItems[3]),
                 ],
               ),
             ),
