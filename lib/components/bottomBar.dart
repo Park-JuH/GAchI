@@ -87,10 +87,7 @@ class BottomBar extends StatefulWidget {
 }
 
 class _BottomBarState extends State<BottomBar> {
-  dynamic selected;
-  double count = 0;
-
-
+  dynamic selected = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -98,10 +95,8 @@ class _BottomBarState extends State<BottomBar> {
       items: itemList,
       hasNotch: true,
       fabLocation: StylishBarFabLocation.center,
-      currentIndex: selected ?? 0,
+      currentIndex: selected,
       onTap: (index) {
-        Navigator.of(context).popUntil((route) => route.isFirst);
-        controller.jumpToPage(index);
         setState(() {
           selected = index;
           controller.jumpToPage(index);

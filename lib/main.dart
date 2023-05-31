@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gachi/components/bottomBar.dart';
-import 'package:gachi/firebase_options.dart';
 import 'package:gachi/pages/bottomMenuPage/VolunteerMainPage.dart';
 import 'package:gachi/pages/bottomMenuPage/chatting.dart';
 import 'package:gachi/pages/bottomMenuPage/interesting.dart';
@@ -15,7 +14,6 @@ import 'package:gachi/pages/userAdd/gachiForm.dart';
 
 var heart = false;
 int pageNum = 0;
-int postNum = 0;
 
 PageController controller = PageController(
   initialPage: 0
@@ -69,7 +67,6 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-
 class _MyHomePageState extends State<MyHomePage> {
   void getPage(int returnNum) {
     setState(() {
@@ -91,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
           controller: controller,
           children: [
             Center(
-              child: VolunteerMainPage(),
+              child: pageNum == 0 ? VolunteerMainPage() : RescuritPage(),
             ),
             Center(child: Interesting()),
             Center(child: Chatting()),
