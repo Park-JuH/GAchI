@@ -45,7 +45,8 @@ class _RescuritPageState extends State<RescuritPage> {
     } catch (e) {
       print(e);
     }
-    QuerySnapshot usersSnapshot = await FirebaseFirestore.instance.collection('Posts').get();
+    QuerySnapshot usersSnapshot =
+        await FirebaseFirestore.instance.collection('Posts').get();
     List<QueryDocumentSnapshot> userDocuments = usersSnapshot.docs;
 
     List<GachiItem> gachiItems = [];
@@ -58,8 +59,7 @@ class _RescuritPageState extends State<RescuritPage> {
             index: 2,
             group: document['group'],
             uid: document['uid'],
-            gender: document['gender']
-        );
+            gender: document['gender']);
         gachiItems.add(newItem);
       }
     }
@@ -71,7 +71,8 @@ class _RescuritPageState extends State<RescuritPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(MediaQuery.of(context).size.height * 0.15),
+        preferredSize:
+            Size.fromHeight(MediaQuery.of(context).size.height * 0.15),
         child: rescuritappbar(),
       ),
       backgroundColor: AppColors.sub1Color,
@@ -94,12 +95,12 @@ class _RescuritPageState extends State<RescuritPage> {
                 if (gachiItems.isEmpty) {
                   return Center(
                       child: Column(
-                        children: [
-                          SizedBox(height: MediaQuery.of(context).size.height * 0.2),
-                          Text('얼른 가치를 만들어주세요! ')
-                        ],
-                      )
-                  );
+                    children: [
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.2),
+                      Text('얼른 가치를 만들어주세요! ')
+                    ],
+                  ));
                 }
 
                 return ListView.builder(

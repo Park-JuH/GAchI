@@ -26,6 +26,17 @@ import 'makeGachi2.dart';
       그래서 height 0으로 설정(보이지 않기위해)
 *
 * */
+void _showMakeGachi(BuildContext context) {
+  showDialog(
+    context: context,
+    barrierDismissible: false, // User must tap button to close dialog
+    builder: (BuildContext context) {
+      return Dialog(
+        child: MakeGachi(),
+      );
+    },
+  );
+}
 
 const kDarkBlueColor = Color(0xFF053149);
 const kBackgroundImagePath = 'assets/images/dog2.png';
@@ -92,12 +103,7 @@ class MakeGachi extends StatelessWidget {
     FirebaseFirestore.instance.collection('Users').doc(loggedUser!.uid);
     // checkFormData(formData);
     // formdata를 파이어베이스에 보내면 됩니다!
-    Navigator.push(
-      context,
-      CupertinoPageRoute(
-        builder: (context) =>  RescuritPage(),    // 모집자 메인화면
-      ),
-    );
+    Navigator.of(context, rootNavigator: true).pop();
   }
 }
 
