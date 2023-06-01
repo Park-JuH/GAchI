@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -81,13 +83,28 @@ Widget profileOndo(BuildContext context, double temperD) {
   );
 }
 
-Widget listBox(String text){
+Widget listBox(BuildContext context, String text, String route){
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
       TextButton(
         onPressed: () {
           // Do something when the button is pressed
+          if(text == '로그아웃 ') {
+            _authentication.signOut();
+            try {
+              final user = _authentication.currentUser;
+              if(user != null) {
+
+                loggedUser = user;
+                print(loggedUser!.email);
+              }
+            } catch(e) {
+              print(e);
+            }
+            print(loggedUser!.email);
+            Navigator.pushNamed(context, route);
+          }
         },
         child: Text(text,style: AppTextStyles.postSubTextStyle,),
       ),
@@ -95,7 +112,7 @@ Widget listBox(String text){
   );
 }
 
-Widget profileBox2() {
+Widget profileBox2(BuildContext context, String route) {
   return Container(
     margin: EdgeInsets.only(top:20),
     child: Column(
@@ -105,10 +122,10 @@ Widget profileBox2() {
           thickness: 0,
         ),
 
-        listBox('활동 뱃지'),
-        listBox('다크모드'),
-        listBox('개발자에게 '),
-        listBox('로그아웃 '),
+        listBox(context, '활동 뱃지', route),
+        listBox(context,'다크모드', route),
+        listBox(context,'개발자에게 ', route),
+        listBox(context,'로그아웃 ', route),
       ],
     ),
   );

@@ -72,7 +72,7 @@ class _ProfilePageState extends State<ProfilePage> {
       body: ListView(
         children: [
           profileBox(context, nick, temperD),
-          profileBox2(),
+          profileBox2(context, '/loginHome'),
         ],
 
       ),
