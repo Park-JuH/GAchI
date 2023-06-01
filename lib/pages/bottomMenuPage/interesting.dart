@@ -38,7 +38,7 @@ class _InterestingState extends State<Interesting> {
       backgroundColor: AppColors.sub1Color,
       body: ListView(
         children: <Widget>[
-         // buildGachiItem_Volumnteer(context, gachiItems[1]),
+         //buildGachiItem_Volumnteer(context, gachiItems[1]),
           const SizedBox(
             height: 10,
           ),

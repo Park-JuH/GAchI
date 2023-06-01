@@ -45,7 +45,7 @@ class GachiItem {
 }
 
 /* 데이터가 업데이트 할때마다 UI를 업데이트하는 함수  */
-Widget buildGachiItems(BuildContext context, Stream<List<GachiItem>> gachiStream) {
+Widget buildGachiItems(BuildContext context, Stream<List<GachiItem>> gachiStream, int pageNum) {
   return StreamBuilder<List<GachiItem>>(
     stream: gachiStream,
     builder: (BuildContext context, AsyncSnapshot<List<GachiItem>> snapshot) {
@@ -59,7 +59,7 @@ Widget buildGachiItems(BuildContext context, Stream<List<GachiItem>> gachiStream
 
       return ListView(
         children: snapshot.data!.map((gachiItem) {
-          return buildGachiItem(context, gachiItem);
+          return buildGachiItem(context, gachiItem, pageNum);
         }).toList(),
       );
     },
@@ -72,7 +72,7 @@ Widget buildGachiItems(BuildContext context, Stream<List<GachiItem>> gachiStream
 
 */
 // Returns a widget that displays information about a GachiItem.
-Widget buildGachiItem(BuildContext context, GachiItem gachiItem) {
+Widget buildGachiItem(BuildContext context, GachiItem gachiItem, int pageNum) {
   final screenHeight = MediaQuery.of(context).size.height;
   final screenWidth = MediaQuery.of(context).size.width;
 
@@ -110,7 +110,8 @@ Widget buildGachiItem(BuildContext context, GachiItem gachiItem) {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(gachiItem.title, style: AppTextStyles.mainStyle),      // 제목
+                          Text(gachiItem.title, style: AppTextStyles.mainStyle),
+                          pageNum == 0 ? Heart() : const SizedBox(height: 0,)
                         ],
                       ),
                       Container(
@@ -163,7 +164,7 @@ Widget buildGachiItem(BuildContext context, GachiItem gachiItem) {
 
 //*   지원자가 쓰는 buildGachiItem  < 하트 있는 버전 >*/
 // Returns a widget that displays information about a GachiItem.
-Widget buildGachiItem_Volumnteer(BuildContext context, GachiItem gachiItem) {
+Widget buildGachiItem_Volumnteer(BuildContext context, GachiItem gachiItem, int pageNum) {
   final screenHeight = MediaQuery.of(context).size.height;
   final screenWidth = MediaQuery.of(context).size.width;
 
@@ -201,8 +202,10 @@ Widget buildGachiItem_Volumnteer(BuildContext context, GachiItem gachiItem) {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(gachiItem.title, style: AppTextStyles.mainStyle),      // 제목
-                          // Heart()
+                          Text(gachiItem.title + ":", style: AppTextStyles.mainStyle),      // 제목
+                          Icon(Icons.favorite),
+                            Heart()
+                          //pageNum == 0 ? Heart() : const SizedBox(height: 0,)
                         ],
                       ),
                       Container(
@@ -255,7 +258,7 @@ Widget buildGachiItem_Volumnteer(BuildContext context, GachiItem gachiItem) {
 
 
 class Heart extends StatefulWidget {
-  const Heart({Key? key}) : super(key: key);
+  Heart({Key? key}) : super(key: key);
 
   @override
   State<Heart> createState() => _HeartState();
@@ -269,7 +272,7 @@ class _HeartState extends State<Heart> {
         heart = !heart;
       });
     },
-        child: heart == true ? const Icon(Icons.favorite_rounded, color: Colors.deepOrange) : const Icon(Icons.favorite_outline_rounded)
+        child: heart == false ? const Icon(Icons.favorite_rounded, color: Colors.deepOrange) : const Icon(Icons.favorite_outline_rounded)
     );
   }
 }

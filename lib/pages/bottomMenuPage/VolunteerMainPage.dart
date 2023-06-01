@@ -218,25 +218,26 @@ class _VolunteerMainPageState extends State<VolunteerMainPage> {
                         children: [
                           SizedBox(
                               height: MediaQuery.of(context).size.height * 0.2),
-                          Text('얼른 가치를 만들어주세요! ')
+                          const Text('얼른 가치를 만들어주세요! ')
                         ],
                       ));
                 }
 
                 return ListView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: gachiItems.length,
                   itemBuilder: (context, index) {
                     final item = gachiItems[index];
-                    return buildGachiItem(context, item);
+                    return buildGachiItem(context, item, 0);
                   },
                 );
               },
             ),
+
           ],
         ),
-      ),
+      )
     );
   }
 }

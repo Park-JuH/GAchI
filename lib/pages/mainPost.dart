@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gachi/components/colors.dart';
-
 import '../components/appbar.dart';
 import '../components/button.dart';
 import 'mainPost2.dart';
@@ -95,37 +94,42 @@ class _RescuritPageState extends State<RescuritPage> {
                 if (gachiItems.isEmpty) {
                   return Center(
                       child: Column(
-                    children: [
-                      SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.2),
-                      Text('얼른 가치를 만들어주세요! ')
-                    ],
-                  ));
+                        children: [
+                          SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.2),
+                          const Text('얼른 가치를 만들어주세요! ')
+                        ],
+                      ));
                 }
 
                 return ListView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: gachiItems.length,
                   itemBuilder: (context, index) {
                     final item = gachiItems[index];
-                    return buildGachiItem(context, item);
+                    return buildGachiItem(context, item, 1);
                   },
                 );
               },
             ),
-            SizedBox(height: 20),
-            Center(
-              child: gachiMakeButton(context, '가치만들기', '/makeGachi'),
+            Column(
+              children: [
+                const SizedBox(height: 20),
+                Center(
+                  child: gachiMakeButton(context, '가치만들기', '/makeGachi'),
+                ),
+                const SizedBox(height: 20),
+                Center(
+                  child: receiveCode(context),
+                ),
+                const SizedBox(height: 40),
+              ],
             ),
-            SizedBox(height: 20),
-            Center(
-              child: receiveCode(context),
-            ),
-            SizedBox(height: 40),
+
           ],
         ),
-      ),
+      )
     );
   }
 }
