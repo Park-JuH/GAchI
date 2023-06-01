@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:gachi/components/appbar.dart';
 import 'package:gachi/components/button.dart';
 import 'package:gachi/components/colors.dart';
+import 'package:gachi/components/firebasePosting.dart';
 import 'package:gachi/pages/mainPost2.dart';
 import 'package:gachi/pages/postDetail.dart';
 
@@ -196,48 +197,7 @@ class _VolunteerMainPageState extends State<VolunteerMainPage> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            StreamBuilder<List<GachiItem>>(
-              stream: _streamController.stream,
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  return Text('Error: ${snapshot.error}');
-                }
-
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
-                }
-
-                final gachiItems = snapshot.data ?? [];
-
-                if (gachiItems.isEmpty) {
-                  return Center(
-                      child: Column(
-                        children: [
-                          SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.2),
-                          const Text('얼른 가치를 만들어주세요! ')
-                        ],
-                      ));
-                }
-
-                return ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: gachiItems.length,
-                  itemBuilder: (context, index) {
-                    final item = gachiItems[index];
-                    return buildGachiItem(context, item, 0);
-                  },
-                );
-              },
-            ),
-
-          ],
-        ),
-      )
+      body: postViewer(context, _streamController, 0)
     );
   }
 }

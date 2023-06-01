@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gachi/components/colors.dart';
+import 'package:gachi/components/firebasePosting.dart';
 import '../components/appbar.dart';
 import '../components/button.dart';
 import 'mainPost2.dart';
@@ -75,61 +76,7 @@ class _RescuritPageState extends State<RescuritPage> {
         child: rescuritappbar(),
       ),
       backgroundColor: AppColors.sub1Color,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            StreamBuilder<List<GachiItem>>(
-              stream: _streamController.stream,
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  return Text('Error: ${snapshot.error}');
-                }
-
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
-                }
-
-                final gachiItems = snapshot.data ?? [];
-
-                if (gachiItems.isEmpty) {
-                  return Center(
-                      child: Column(
-                        children: [
-                          SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.2),
-                          const Text('얼른 가치를 만들어주세요! ')
-                        ],
-                      ));
-                }
-
-                return ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: gachiItems.length,
-                  itemBuilder: (context, index) {
-                    final item = gachiItems[index];
-                    return buildGachiItem(context, item, 1);
-                  },
-                );
-              },
-            ),
-            Column(
-              children: [
-                const SizedBox(height: 20),
-                Center(
-                  child: gachiMakeButton(context, '가치만들기', '/makeGachi'),
-                ),
-                const SizedBox(height: 20),
-                Center(
-                  child: receiveCode(context),
-                ),
-                const SizedBox(height: 40),
-              ],
-            ),
-
-          ],
-        ),
-      )
+      body: postViewer(context, _streamController, 1)
     );
   }
 }
