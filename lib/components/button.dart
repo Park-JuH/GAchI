@@ -94,6 +94,7 @@ Widget gachiMakeButton(BuildContext context, String text, String route,
 Widget categoriesButtons(BuildContext context,
     {Function(String)? onRadioButtonChanged}) {
   return CustomRadioButton(
+    margin: EdgeInsets.all(0),
     elevation: 1.0,
     absoluteZeroSpacing: false,
     horizontal: true,

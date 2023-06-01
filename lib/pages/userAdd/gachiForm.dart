@@ -7,12 +7,13 @@ import 'package:flutter/foundation.dart';
 * */
 class FormData extends ChangeNotifier {
   String selectedGender = '상관없음';
-  List<String> genders = ['여자', '남자', '상관없음', '혼성'];
+  List<String> genders = ['여자', '남자', '상관없음'];
   double sliderValue1 = 0.0;
   double sliderValue2 = 0.0;
   String category = '';
   String title = '';
   String body = '';
+
 
 
   void updateSelectedGender(String newSelectedGender) {

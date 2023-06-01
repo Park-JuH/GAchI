@@ -22,9 +22,8 @@ class Select_Category extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              alignment: Alignment.center,
               width: MediaQuery.of(context).size.width,
-              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
+              padding: const EdgeInsets.symmetric(horizontal: 40),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -32,10 +31,24 @@ class Select_Category extends StatelessWidget {
                   Container(
                     child: Column(
                       children: [
-                        Text(
-                          '카테고리 선택',
-                          textAlign: TextAlign.center,
-                          style: AppTextStyles.postTitleTextStyle,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            InkWell(
+                              onTap: (){
+                                Navigator.pop(context);
+                              },
+                              child: Icon(Icons.chevron_left),
+                            ),
+                            Text(
+                              '카테고리 선택',
+                              textAlign: TextAlign.center,
+                              style: AppTextStyles.postTitleTextStyle,
+                            ),
+                            SizedBox(
+                              height: 0,
+                            ),
+                          ],
                         ),
                         Text(
                           '어떤 가치를 만들 것입니까?',
@@ -45,13 +58,11 @@ class Select_Category extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Center(
-                    child: categoriesButtons(context,
+                  categoriesButtons(context,
                         onRadioButtonChanged: (category) {
                           print(category);
                           formData.updateCategory(category);
                         }),
-                  )
                 ],
               ),
             ),
@@ -111,7 +122,7 @@ class _Select_DetailState extends State<Select_Detail> {
               onChanged: (String? newValue) {
                 formData.updateSelectedGender(newValue!);
               },
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: "성별 선택",
                 labelStyle: TextStyle(color: Colors.green),
                 enabledBorder: OutlineInputBorder(
@@ -122,7 +133,7 @@ class _Select_DetailState extends State<Select_Detail> {
                 ),
               ),
             ),
-            (formData.selectedGender == '혼성') ? buildSlider() : buildSlider(1),
+            buildSlider(1),
           ],
         ),
       ),
