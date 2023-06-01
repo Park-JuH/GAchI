@@ -1,23 +1,12 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gachi/components/appbar.dart';
 import 'package:gachi/components/colors.dart';
+import 'package:gachi/components/firebasePosting.dart';
 import 'package:gachi/pages/mainPost2.dart';
-
-/*    <모집자 페이지>
-      모집자 메인화면임.
-      모집자 main 화면 코드  : 자기가 만든 모임(가치) 상태 확인
-      ◆ list 관련 코드  자세한 코드는 mainPost2.dart에 있음
-      주요코드 :
-          buildGachiItem(context, gachiItems[1]),
-          SizedBox(
-            height: 10,
-          ),
-          buildGachiItem(context, gachiItems[0]),
-          //buildGachiItem(context, gachiItems[2]),
-          //buildGachiItem(context, gachiItems[3]),
-
-*
-* */
 
 class Interesting extends StatefulWidget {
   const Interesting({Key? key}) : super(key: key);
@@ -27,30 +16,68 @@ class Interesting extends StatefulWidget {
 }
 
 class _InterestingState extends State<Interesting> {
+  late final StreamController<List<GachiItem>> _streamController;
+
+  @override
+  void initState() {
+    super.initState();
+    _streamController = StreamController();
+    fetchGachiItems();
+  }
+
+  @override
+  void dispose() {
+    _streamController.close();
+    super.dispose();
+  }
+
+  /* 이 함 수 안에 data 가져오면 되는듯.  */
+  Future<void> fetchGachiItems() async {
+    final _authentication = FirebaseAuth.instance;
+    User? loggedUser;
+    try {
+      final user = _authentication.currentUser;
+      if (user != null) {
+        loggedUser = user;
+        print(loggedUser!.uid);
+      }
+    } catch (e) {
+      print(e);
+    }
+    QuerySnapshot usersSnapshot =
+    await FirebaseFirestore.instance.collection('Posts').get();
+    List<QueryDocumentSnapshot> userDocuments = usersSnapshot.docs;
+
+    List<GachiItem> gachiItems = [];
+    //여기서 uid를 적절한 방식으로 바꿔서 나타내면 될듯해요
+    for (QueryDocumentSnapshot document in userDocuments) {
+      if (document['uid'] == loggedUser!.uid) {
+        GachiItem newItem = GachiItem(
+            title: document['title'],
+            state: '모집 중',
+            category: document['category'],
+            index: 2,
+            group: document['group'],
+            uid: document['uid'],
+            gender: document['gender'],
+            puid: document['puid']
+        );
+        gachiItems.add(newItem);
+      }
+    }
+    // add items to stream
+    _streamController.add(gachiItems);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize:
-        Size.fromHeight(MediaQuery.of(context).size.height * 0.2),
-        child: appbar(),
-      ),
-      backgroundColor: AppColors.sub1Color,
-      body: ListView(
-        children: <Widget>[
-         //buildGachiItem_Volumnteer(context, gachiItems[1]),
-          const SizedBox(
-            height: 10,
-          ),
-          //buildGachiItem_Volumnteer(context, gachiItems[0]),
-          //buildGachiItem_Volumnteer(context, gachiItems[2]),
-          //buildGachiItem_Volumnteer(context, gachiItems[3]),
-          const SizedBox(
-            height: 20,
-          ),
-
-        ],
-      ),
+        appBar: PreferredSize(
+          preferredSize:
+          Size.fromHeight(MediaQuery.of(context).size.height * 0.15),
+          child: rescuritappbar(),
+        ),
+        backgroundColor: AppColors.sub1Color,
+        body: postViewer(context, _streamController, 1)
     );
   }
 }

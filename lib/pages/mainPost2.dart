@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:material_dialogs/dialogs.dart';
@@ -7,7 +10,7 @@ import '../components/colors.dart';
 import '../components/pinputs.dart';
 import '../components/texts.dart';
 import 'gachiDetail.dart';
-bool heart = true;
+bool heart = false;
 
 /*    <모집자 페이지>
       모집자 메인화면면에 들어가는 전반적인 요소들 관리하는 코드
@@ -109,7 +112,7 @@ Widget buildGachiItem(BuildContext context, GachiItem gachiItem, int pageNum) {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(gachiItem.title, style: AppTextStyles.mainStyle),
-                          pageNum == 0 ? const Heart() : const SizedBox(height: 0,)
+                          pageNum == 0 ? Heart(puid: gachiItem.puid,) : const SizedBox(height: 0,)
                         ],
                       ),
                       Container(
@@ -164,21 +167,28 @@ Widget buildGachiItem(BuildContext context, GachiItem gachiItem, int pageNum) {
 
 
 class Heart extends StatefulWidget {
-  const Heart({Key? key}) : super(key: key);
-
+  Heart({Key? key, this.puid}) : super(key: key);
+  final puid;
   @override
   State<Heart> createState() => _HeartState();
 }
 
 class _HeartState extends State<Heart> {
+
   @override
   Widget build(BuildContext context) {
     return InkWell(onTap : (){
+
+      print(widget.puid);
       setState(() {
         heart = !heart;
+        if (heart == true)
+          print("on");
+        else
+          print("off");
       });
     },
-        child: heart == false ? const Icon(Icons.favorite_rounded, color: Colors.deepOrange) : const Icon(Icons.favorite_outline_rounded)
+        child: heart == true ? const Icon(Icons.favorite_rounded, color: Colors.deepOrange) : const Icon(Icons.favorite_outline_rounded)
     );
   }
 }
