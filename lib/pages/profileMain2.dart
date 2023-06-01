@@ -7,9 +7,12 @@ import '../components/texts.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-FirebaseFirestore _firestore = FirebaseFirestore.instance;
-FirebaseAuth _auth = FirebaseAuth.instance;
-User? _user = _auth.currentUser;
+// FirebaseFirestore _firestore = FirebaseFirestore.instance;
+// FirebaseAuth _auth = FirebaseAuth.instance;
+// User? _user = _auth.currentUser;
+
+final _authentication = FirebaseAuth.instance;
+User? loggedUser;
 
 Widget profileImage() {
   return Container(

@@ -59,7 +59,9 @@ class _RescuritPageState extends State<RescuritPage> {
             index: 2,
             group: document['group'],
             uid: document['uid'],
-            gender: document['gender']);
+            gender: document['gender'],
+            puid: document['puid']
+        );
         gachiItems.add(newItem);
       }
     }

@@ -91,13 +91,21 @@ class MakeGachi extends StatelessWidget {
     } catch (e) {
       print(e);
     }
-    fireStore.collection('Posts').doc().set({
+    CollectionReference postsCollection = FirebaseFirestore.instance.collection('Posts');
+
+    DocumentReference newDocRef = postsCollection.doc(); // 새로운 문서 생성
+
+    String newDocId = newDocRef.id; // 새로운 문서의 uid 얻기
+
+// 생성한 문서에 데이터 설정
+    newDocRef.set({
       'category': formData.category,
       'gender': formData.selectedGender,
       'group': group,
       'text': formData.body,
       'title': formData.title,
       'uid': loggedUser!.uid,
+      'puid': newDocId,
     });
     DocumentReference userDocRef =
     FirebaseFirestore.instance.collection('Users').doc(loggedUser!.uid);

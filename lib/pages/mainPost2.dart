@@ -28,6 +28,7 @@ class GachiItem {
   final int group;
   final String uid;
   final String gender;
+  final String puid;
 
   GachiItem({
     required this.title,
@@ -36,7 +37,8 @@ class GachiItem {
     required this.index,
     required this.group,
     required this.uid,
-    required this.gender
+    required this.gender,
+    required this.puid,
   });
 }
 
