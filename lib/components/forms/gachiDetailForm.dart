@@ -27,7 +27,10 @@ Widget gachiDetailBox(BuildContext context, String title, String detail, String 
               text('메뉴는 채팅으로 정합시다 밥 같이 먹어요오', 18, FontWeight.w500, 20),
               text('여2남2', 15, FontWeight.w600, 5),
               text('D-Day 11am-13pm', 15, FontWeight.w600, 5),
-              // Text(title, style: TextStyle(fontSize: 28, fontWeight: FontWeight.w800)),  // 글제목
+              text('<모집자 : 가천대1짱>'  , 15, FontWeight.w600, 5),
+
+
+              //Text(title, style: TextStyle(fontSize: 28, fontWeight: FontWeight.w800)),  // 글제목
               // SizedBox(height: 15),
               // Text(detail, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),  // 글세부내용
               // SizedBox(height: 20),
@@ -35,7 +38,9 @@ Widget gachiDetailBox(BuildContext context, String title, String detail, String 
               // SizedBox(height: 5),
               // Text(category, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),  // 카테고리
               // SizedBox(height: 5),
-
+              //Text('<모집자 : '+nick+'>', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),  // 카테고리
+              // SizedBox(height: 5),
+              
               Container(
                 margin: EdgeInsets.only(top: 5),
                 child: Row(

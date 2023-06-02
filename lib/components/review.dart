@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 void showRatingDialog(BuildContext context) {
   double rating = 0;
+  String title  ="";
 
   showDialog(
     context: context,
@@ -9,7 +10,7 @@ void showRatingDialog(BuildContext context) {
       return StatefulBuilder(
         builder: (context, setState) {
           return AlertDialog(
-            title: Text('Rate this event'),                 // 모집글 제목
+            title: Text(title),                 // 모집글 제목
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
