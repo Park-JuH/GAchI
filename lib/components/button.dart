@@ -3,7 +3,7 @@ import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'colors.dart';
+import '../attributes/colors.dart';
 /*
 *   버튼관리 코드
 *   route는 main에서 관리함.
@@ -181,6 +181,43 @@ Widget profileModify_button(BuildContext context, String text, String route, {Vo
     ),
   );
 }
+
+
+/*    가치 삭제버튼  */
+Widget gachiDelete_button(BuildContext context, String text, {VoidCallback? onPressed}) {
+  double screenWidth = MediaQuery.of(context).size.width;
+  double buttonWidth = screenWidth * 0.20; // 버튼 넓이
+  return Align(
+    alignment: Alignment.center,
+    child: Container(
+      margin: const EdgeInsets.only(right: 10),
+      width: buttonWidth,
+      height: 35,
+      decoration: BoxDecoration(
+        color: AppColors.sub2Color,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: TextButton(
+        onPressed: () {
+          if(text == '신고하기') {
+            // 유저 신고하기  (아직 기능페이지 안 만듦)   -- 지원자만 가능
+          } else if(text == '가치 삭제') {
+            // 가치 삭제하기 기능 -- 모집자 만 가능
+          }
+          if (onPressed != null) {
+            onPressed();
+          }
+        },
+        style: TextButton.styleFrom(
+          primary: Colors.white, // This sets the text color
+        ),
+        child: Center(child: Text(text)),
+      ),
+    ),
+  );
+}
+
+
 
 Widget loginbutton(BuildContext context, String text, String route,
     String username, String password,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'button.dart';
-import 'colors.dart';
+import '../attributes/colors.dart';
 
 // 메인 화면의 같은 색 상단 부분을 지정하는 코드입니다.
 /*
@@ -160,7 +160,7 @@ Widget profileAppbar(BuildContext context) {
 }
 
 
-Widget gachiDetailAppbar(BuildContext context, String text, String path) {
+Widget gachiDetailAppbar(BuildContext context, String text) {
   return Container(
     height: 120,
     child: Column(
@@ -189,7 +189,7 @@ Widget gachiDetailAppbar(BuildContext context, String text, String path) {
               ),
             ),
             Container(
-                child: profileModify_button(context, text, path)
+                child: gachiDelete_button(context, text)    // button.dart
             ),
           ],
         ),

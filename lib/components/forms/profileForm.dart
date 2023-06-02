@@ -3,9 +3,9 @@ import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../components/button.dart';
-import '../components/colors.dart';
-import '../components/texts.dart';
+import '../button.dart';
+import '../../attributes/colors.dart';
+import '../../attributes/texts.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 

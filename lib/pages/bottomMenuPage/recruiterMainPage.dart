@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gachi/components/colors.dart';
+import 'package:gachi/attributes/colors.dart';
 import 'package:gachi/components/firebasePosting.dart';
-import '../components/appbar.dart';
-import '../components/button.dart';
-import 'mainPost2.dart';
+import '../../components/appbar.dart';
+import '../../components/button.dart';
+import '../../components/forms/postForm.dart';
 
 class RescuritPage extends StatefulWidget {
   const RescuritPage({Key? key}) : super(key: key);

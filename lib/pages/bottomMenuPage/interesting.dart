@@ -4,9 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gachi/components/appbar.dart';
-import 'package:gachi/components/colors.dart';
+import 'package:gachi/attributes/colors.dart';
 import 'package:gachi/components/firebasePosting.dart';
-import 'package:gachi/pages/mainPost2.dart';
+import 'package:gachi/components/forms/postForm.dart';
 
 class Interesting extends StatefulWidget {
   const Interesting({Key? key}) : super(key: key);

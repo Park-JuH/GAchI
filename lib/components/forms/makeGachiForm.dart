@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../components/button.dart';
-import '../components/texts.dart';
+import '../button.dart';
+import '../../attributes/texts.dart';
 import 'package:gachi/pages/userAdd/gachiForm.dart';
 /*    <모집자 페이지>
       가치만들기(생성)  페이지에 필요한 전반적인 화면을 관리하는 파일
