@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'button.dart';
-import 'colors.dart';
+import '../attributes/colors.dart';
 
 // 메인 화면의 같은 색 상단 부분을 지정하는 코드입니다.
 /*

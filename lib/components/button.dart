@@ -3,7 +3,7 @@ import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'colors.dart';
+import '../attributes/colors.dart';
 /*
 *   버튼관리 코드
 *   route는 main에서 관리함.

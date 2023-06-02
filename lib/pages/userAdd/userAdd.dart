@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gachi/components/userAddForm.dart';
-import 'package:gachi/pages/loginMain.dart';
+import 'package:gachi/components/forms/userAddForm.dart';
+import 'package:gachi/pages/loginMainPage.dart';
 
 class NickName extends StatefulWidget {
   const NickName({Key? key}) : super(key: key);

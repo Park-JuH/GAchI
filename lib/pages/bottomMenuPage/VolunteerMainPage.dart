@@ -5,10 +5,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gachi/components/appbar.dart';
 import 'package:gachi/components/button.dart';
-import 'package:gachi/components/colors.dart';
+import 'package:gachi/attributes/colors.dart';
 import 'package:gachi/components/firebasePosting.dart';
-import 'package:gachi/pages/mainPost2.dart';
-import 'package:gachi/pages/postDetail.dart';
+import 'package:gachi/components/forms/postForm.dart';
+import 'package:gachi/pages/postDetailPage.dart';
 
 // 최종 편집 : 구도연
 // 파베 관련 기능은 옆동네에서 가져옴. 리팩토링하면 좋을듯.

@@ -1,10 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:gachi/pages/profileMain2.dart';
+import 'package:gachi/components/forms/profileForm.dart';
 import 'package:gachi/pages/userAdd/userAdd.dart';
 
-import '../components/texts.dart';
-import 'loginMain2.dart';
+import '../attributes/texts.dart';
+import '../components/forms/loginForm.dart';
 
 class LoginMainPage extends StatefulWidget {
   const LoginMainPage({Key? key}) : super(key: key);

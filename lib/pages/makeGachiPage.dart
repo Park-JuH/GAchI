@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_onboarding_slider/flutter_onboarding_slider.dart';
 import 'package:provider/provider.dart';
 import 'package:gachi/pages/userAdd/gachiForm.dart';
-import '../components/userAddForm.dart';
-import 'mainPost.dart';
-import 'makeGachi2.dart';
+import '../components/forms/userAddForm.dart';
+import 'bottomMenuPage/recruiterMainPage.dart';
+import '../components/forms/makeGachiForm.dart';
 
 /*    <모집자 페이지>
       가치만들기(생성)  메인 코드

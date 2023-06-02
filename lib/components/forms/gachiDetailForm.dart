@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:gachi/pages/postDetail.dart';
+import 'package:gachi/pages/postDetailPage.dart';
 
-import '../components/colors.dart';
+import '../../attributes/colors.dart';
 
 
 /* 모집글 상세 정보 관련 위젯 */
@@ -147,10 +147,10 @@ Widget watingPeopleListBox(BuildContext context) {
 
 
 Widget watingPersonListBox(BuildContext context) {
-  return Container(
+  return SizedBox(
     width: MediaQuery.of(context).size.width * 0.9,
     child: Slidable(
-      actionPane: SlidableDrawerActionPane(),
+      actionPane: const SlidableDrawerActionPane(),
       actionExtentRatio: 0.25,
       child: Container(
         child: Row(

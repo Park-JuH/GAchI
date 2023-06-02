@@ -5,11 +5,11 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:material_dialogs/dialogs.dart';
 import 'package:pinput/pinput.dart';
-import '../components/button.dart';
-import '../components/colors.dart';
-import '../components/pinputs.dart';
-import '../components/texts.dart';
-import 'gachiDetail.dart';
+import '../button.dart';
+import '../../attributes/colors.dart';
+import '../pinputs.dart';
+import '../../attributes/texts.dart';
+import '../../pages/gachiDetailPage.dart';
 bool heart = false;
 
 /*    <모집자 페이지>

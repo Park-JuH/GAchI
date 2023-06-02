@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gachi/pages/mainPost2.dart';
+import 'package:gachi/components/forms/postForm.dart';
 
 import '../components/appbar.dart';
-import '../components/variable.dart';
-import 'gachiDetail2.dart';
+import '../attributes/variable.dart';
+import '../components/forms/gachiDetailForm.dart';
 
 // 성별(여자,남자,혼성, 상관없음), 게시글 제목, 게시글 내용, 가치 카테고리
 class gachiDetail extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gachi/components/texts.dart';
+import 'package:gachi/attributes/texts.dart';
 import 'package:gachi/pages/userAdd/userAdd.dart';
-import '../components/button.dart';
+import '../button.dart';
 
 Widget loginImageBox() {
   return Container(
