@@ -4,11 +4,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_ml_kit/google_ml_kit.dart';
+
 String warning = "값이 입력되지 않았어요!";
 
-FirebaseFirestore fireStore=FirebaseFirestore.instance;
+FirebaseFirestore fireStore = FirebaseFirestore.instance;
 
 String nickname = '';
 String id = '';
@@ -25,26 +26,29 @@ String idCard = '';
 // 다음 입력화면으로 넘어가도록 하는 버튼.
 // value가 텍스트를 담고 있음.
 // 이곳에서 빈값이면 페이지를 넘기지 않는 기능, 비밀번호 확인 기능 구현.
-Widget nextBtn(BuildContext context, var next, var _textEditingController, var _pwCheckController, double pageNum){
+Widget nextBtn(BuildContext context, var next, var _textEditingController,
+    var _pwCheckController, double pageNum) {
   return ElevatedButton(
       onPressed: () async {
         String value = _textEditingController.text;
         // 비밀번호 확인 페이지를 위한 코드.
-        if (pageNum == 2){
-          if (_textEditingController.text == _pwCheckController.text){
+        if (pageNum == 2) {
+          if (_textEditingController.text == _pwCheckController.text) {
             // 파이어베이스 연동하실 때 _textEditingController.text를 이용하시면 입력창에 있는 텍스트를 가져오실 수 있습니다.
             pw = _textEditingController.text;
             print(_textEditingController.text);
-            Navigator.push(context, MaterialPageRoute(builder: (context)=> next));
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => next));
           }
         }
         //일반적인 경우의 코드.
-        else{
+        else {
           if (value != "") {
             print(value);
             int eval = 0;
             if (pageNum == 0) {
-              QuerySnapshot usersSnapshot = await FirebaseFirestore.instance.collection('Users').get();
+              QuerySnapshot usersSnapshot =
+                  await FirebaseFirestore.instance.collection('Users').get();
               List<QueryDocumentSnapshot> userDocuments = usersSnapshot.docs;
 
               for (QueryDocumentSnapshot document in userDocuments) {
@@ -55,11 +59,12 @@ Widget nextBtn(BuildContext context, var next, var _textEditingController, var _
               }
               if (eval != 1) {
                 nickname = value;
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> next));
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => next));
               }
-            }
-            else if (pageNum == 1) {
-              QuerySnapshot usersSnapshot = await FirebaseFirestore.instance.collection('Users').get();
+            } else if (pageNum == 1) {
+              QuerySnapshot usersSnapshot =
+                  await FirebaseFirestore.instance.collection('Users').get();
               List<QueryDocumentSnapshot> userDocuments = usersSnapshot.docs;
 
               for (QueryDocumentSnapshot document in userDocuments) {
@@ -70,11 +75,12 @@ Widget nextBtn(BuildContext context, var next, var _textEditingController, var _
               }
               if (eval != 1) {
                 id = value;
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> next));
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => next));
               }
-            }
-            else if (pageNum == 3) {
-              QuerySnapshot usersSnapshot = await FirebaseFirestore.instance.collection('Users').get();
+            } else if (pageNum == 3) {
+              QuerySnapshot usersSnapshot =
+                  await FirebaseFirestore.instance.collection('Users').get();
               List<QueryDocumentSnapshot> userDocuments = usersSnapshot.docs;
 
               for (QueryDocumentSnapshot document in userDocuments) {
@@ -85,8 +91,8 @@ Widget nextBtn(BuildContext context, var next, var _textEditingController, var _
               if (eval != 1 && getGender(value) != 'Invalid ID') {
                 final _authentication = FirebaseAuth.instance;
                 try {
-                  final newUser = await _authentication
-                      .createUserWithEmailAndPassword(
+                  final newUser =
+                      await _authentication.createUserWithEmailAndPassword(
                     email: id,
                     password: pw,
                   );
@@ -95,63 +101,62 @@ Widget nextBtn(BuildContext context, var next, var _textEditingController, var _
                     'id': id,
                     'pw': pw,
                     'idCard': getGender(value),
-                    'heart' : 36
+                    'heart': 36
                   });
-                  if (newUser.user != null) {
-                  }
+                  if (newUser.user != null) {}
                 } catch (e) {
                   print(e);
                 }
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> next));
-              }
-              else {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => next));
+              } else {
                 print('Invalid value');
               }
-
             }
-          }
-          else {
+          } else {
             print(context);
-            Navigator.push(context, MaterialPageRoute(builder: (context)=> next));
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => next));
           }
         }
       },
       style: ElevatedButton.styleFrom(
-          primary: const Color(0xFFEF8C00),
-          elevation: 0
-      ),
-
+          primary: const Color(0xFFEF8C00), elevation: 0),
       child: pageNum == 4 ? const Text('완료') : const Text('다음'));
 }
 
 // 입력창에 대한 코드.
 // 값을 입력하지 않으면 값을 입력하라는 메시지가 뜸.
-Widget input(var _controller, int limit, double pageNum, String hint){
+Widget input(var _controller, int limit, double pageNum, String hint) {
   return TextFormField(
     controller: _controller,
     autovalidateMode: AutovalidateMode.always,
-    validator: (value){
-      if (value == null || value.isEmpty){
+    validator: (value) {
+      if (value == null || value.isEmpty) {
         return '값을 입력해주세요';
       }
       return null;
     },
     maxLength: limit,
-    inputFormatters: [pageNum != 3 ? FilteringTextInputFormatter.singleLineFormatter : FilteringTextInputFormatter.digitsOnly], //주민번호는 숫자만 입력받을 수 있도록.
+    inputFormatters: [
+      pageNum != 3
+          ? FilteringTextInputFormatter.singleLineFormatter
+          : FilteringTextInputFormatter.digitsOnly
+    ], //주민번호는 숫자만 입력받을 수 있도록.
     obscureText: pageNum != 2 ? false : true,
-    decoration: InputDecoration(hintText: hint),);
+    decoration: InputDecoration(hintText: hint),
+  );
 }
 
-
 class userAddForm extends StatefulWidget {
-  userAddForm(this.pageNum, this.title, this.text, this.hint, this.limit, this.next);
+  userAddForm(
+      this.pageNum, this.title, this.text, this.hint, this.limit, this.next);
   final double pageNum;
   final String title;
   final String text;
   final String hint;
   final int limit;
   var next;
-
 
   @override
   State<userAddForm> createState() => _userAddFormState();
@@ -163,6 +168,32 @@ class _userAddFormState extends State<userAddForm> {
   TextEditingController _pwCheckController = TextEditingController();
   XFile? _image; //이미지를 담을 변수 선언
   final ImagePicker picker = ImagePicker(); //ImagePicker 초기화
+
+  // 텍스트 인식한 정보를 담은 공간
+  String recognizedText = '';
+
+  Future<void> pickImageAndGCUText() async {
+    final inputImage = InputImage.fromFilePath(_image!.path);
+    final textRecognizer = GoogleMlKit.vision.textRecognizer();
+    final RecognizedText recognizedTextResult =
+        await textRecognizer.processImage(inputImage);
+
+    String text = '';
+    for (TextBlock block in recognizedTextResult.blocks) {
+      for (TextLine line in block.lines) {
+        for (TextElement element in line.elements) {
+          text = text + ' ' + element.text;
+        }
+      }
+    }
+
+    textRecognizer.close();
+
+    setState(() {
+      recognizedText = text;
+    });
+  }
+
   //이미지를 가져오는 함수
   Future getImage(ImageSource imageSource) async {
     //pickedFile에 ImagePicker로 가져온 이미지가 담긴다.
@@ -171,11 +202,12 @@ class _userAddFormState extends State<userAddForm> {
       setState(() {
         _image = XFile(pickedFile.path); //가져온 이미지를 _image에 저장
       });
+
+      await pickImageAndGCUText();
     }
   }
 
   @override
-
   void dispose() {
     _textEditingController.dispose(); // Dispose the TextEditingController
     _pwCheckController.dispose();
@@ -189,7 +221,7 @@ class _userAddFormState extends State<userAddForm> {
     String hint = widget.hint;
     int limit = widget.limit;
     var next = widget.next;
-    
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -197,20 +229,24 @@ class _userAddFormState extends State<userAddForm> {
           children: [
             Column(
               children: [
-                const SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 10),
                   height: 100,
                   child: Row(
                     children: [
                       InkWell(
-                        onTap: (){
+                        onTap: () {
                           Navigator.pop(context);
                         },
-                        child: const Icon(Icons.arrow_back_ios_new_rounded),),
+                        child: const Icon(Icons.arrow_back_ios_new_rounded),
+                      ),
                       Text(
                         title,
-                        style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w800),
+                        style: const TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.w800),
                       ),
                     ],
                   ),
@@ -218,83 +254,106 @@ class _userAddFormState extends State<userAddForm> {
               ],
             ),
             SizedBox(
-              height: pageNum != 2 ? MediaQuery.of(context).size.height * 0.2 : MediaQuery.of(context).size.height * 0.15
-            ),
+                height: pageNum != 2
+                    ? MediaQuery.of(context).size.height * 0.2
+                    : MediaQuery.of(context).size.height * 0.15),
             Container(
                 margin: const EdgeInsets.symmetric(horizontal: 30),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    pageNum == 4 ?
-                    Column(
-                      children: [
-                        _image != null
-                            ? Container(
-                          width: 300,
-                          height: 300,
-                          child: Image.file(File(_image!.path)), //가져온 이미지를 화면에 띄워주는 코드
-                        )
-                            : Container(
-                          width: 300,
-                          height: 300,
-                          color: Colors.grey,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  primary: Color(0xFFEF8C00),
-                                  elevation: 0
+                    pageNum == 4
+                        ? Column(
+                            children: [
+                              _image != null
+                                  ? Container(
+                                      width: 300,
+                                      height: 300,
+                                      child: Image.file(File(
+                                          _image!.path)), //가져온 이미지를 화면에 띄워주는 코드
+                                    )
+                                  : Container(
+                                      width: 300,
+                                      height: 300,
+                                      color: Colors.grey,
+                                    ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        primary: Color(0xFFEF8C00),
+                                        elevation: 0),
+                                    onPressed: () {
+                                      getImage(ImageSource
+                                          .camera); //getImage 함수를 호출해서 카메라로 찍은 사진 가져오기
+                                    },
+                                    child: const Text("카메라"),
+                                  ),
+                                  const SizedBox(width: 30),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        primary: Color(0xFFEF8C00),
+                                        elevation: 0),
+                                    onPressed: () {
+                                      getImage(ImageSource
+                                          .gallery); //getImage 함수를 호출해서 갤러리에서 사진 가져오기
+                                    },
+                                    child: const Text("갤러리"),
+                                  ),
+                                ],
                               ),
-                              onPressed: () {
-                                getImage(ImageSource.camera); //getImage 함수를 호출해서 카메라로 찍은 사진 가져오기
-                              },
-                              child: const Text("카메라"),
-                            ),
-                            const SizedBox(width: 30),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  primary: Color(0xFFEF8C00),
-                                  elevation: 0
+                              const SizedBox(
+                                height: 1,
                               ),
-                              onPressed: () {
-                                getImage(ImageSource.gallery); //getImage 함수를 호출해서 갤러리에서 사진 가져오기
-                              },
-                              child: const Text("갤러리"),
-                            ),
-                          ],
-                        ),
-                      ],
-                    )
+                              Text(
+                                'Recognized Text: $recognizedText',
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ],
+                          )
                         : input(_textEditingController, limit, pageNum, hint),
                     Text(text),
-                    const SizedBox(height: 20,),
-                    pageNum != 2 ? const SizedBox(height: 0,) :
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        input(_pwCheckController, limit, pageNum, hint),
-                        const Text('비밀번호를 다시 입력해주세요'),
-                        const SizedBox(height: 30,)
-                      ],
+                    const SizedBox(
+                      height: 20,
                     ),
-                    pageNum == 1 ? Row(children: [
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              primary: const Color(0xFFEF8C00),
-                              elevation: 0
+                    pageNum != 2
+                        ? const SizedBox(
+                            height: 0,
+                          )
+                        : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              input(_pwCheckController, limit, pageNum, hint),
+                              const Text('비밀번호를 다시 입력해주세요'),
+                              const SizedBox(
+                                height: 30,
+                              )
+                            ],
                           ),
-                          onPressed: (){
-
-                          }, child: const Text('중복확인')),
-                      const SizedBox(width: 30,),
-                      nextBtn(context, next, _textEditingController, _pwCheckController, pageNum)
-                    ],) :
-                    nextBtn(context, next, _textEditingController, _pwCheckController, pageNum)
+                    pageNum == 1
+                        ? Row(
+                            children: [
+                              ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      primary: const Color(0xFFEF8C00),
+                                      elevation: 0),
+                                  onPressed: () {},
+                                  child: const Text('중복확인')),
+                              const SizedBox(
+                                width: 30,
+                              ),
+                              nextBtn(context, next, _textEditingController,
+                                  _pwCheckController, pageNum)
+                            ],
+                          )
+                        : nextBtn(context, next, _textEditingController,
+                            _pwCheckController, pageNum)
                   ],
-                )
-            ),
+                )),
             const SizedBox(
               height: 0,
             ),
