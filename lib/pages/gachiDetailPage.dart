@@ -4,6 +4,7 @@ import 'package:gachi/components/forms/postForm.dart';
 import '../components/appbar.dart';
 import '../attributes/variable.dart';
 import '../components/forms/gachiDetailForm.dart';
+import '../main.dart';
 
 // 성별(여자,남자,혼성, 상관없음), 게시글 제목, 게시글 내용, 가치 카테고리
 class gachiDetail extends StatefulWidget {
@@ -16,12 +17,12 @@ class gachiDetail extends StatefulWidget {
 class _gachiDetailState extends State<gachiDetail>
     with TickerProviderStateMixin {
   late final TabController _tabController; // tab (참여자 / 대기자 tabController)
-  bool isRecruitingClosed = false; // 모집마감 여부를 저장하는 변수
+  bool isRecruitingClosed = false; // 모집 마감 여부를 저장하는 변수
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(vsync: this, length: 2);
+    _tabController = TabController(vsync: this, length: pageNum == 0 ? 1 : 2); // if pageNum == 0, then only 1 tab else 2 tabs
   }
 
   @override
@@ -46,15 +47,14 @@ class _gachiDetailState extends State<gachiDetail>
                 gachiDetailBox(
                     context, title, detail, gender, numOfPeople, category),
                 Divider(thickness: 1),
-                gachiOptionBox(_tabController),
+                gachiOptionBox(_tabController, pageNum),
                 Container(
                   height: MediaQuery.of(context).size.height,
                   child: TabBarView(
                     controller: _tabController,
-                    children: [
-                      peopleListBox(context),
-                      watingPeopleListBox(context),
-                    ],
+                    children: pageNum == 0
+                        ? [peopleListBox(context, pageNum)]
+                        : [peopleListBox(context, pageNum), watingPeopleListBox(context)],
                   ),
                 ),
               ],
@@ -67,6 +67,7 @@ class _gachiDetailState extends State<gachiDetail>
               child: gachiEndButton(
                 context,
                 isRecruitingClosed,
+                pageNum,
               )),
         ],
       ),
