@@ -190,7 +190,6 @@ Widget watingPersonListBox(BuildContext context) {
   );
 }
 
-/* 모집 마감 버튼 */
 Widget gachiEndButton(BuildContext context, bool isClosed, int pageNum) {
   return StatefulBuilder(
     builder: (BuildContext context, StateSetter setState) => Column(
@@ -208,6 +207,7 @@ Widget gachiEndButton(BuildContext context, bool isClosed, int pageNum) {
               ),
               child: TextButton(
                 onPressed: () {
+                  print('채팅하기');
                   // 채팅하기 버튼이 클릭되었을 때 실행할 코드
                 },
                 style: TextButton.styleFrom(
@@ -230,11 +230,16 @@ Widget gachiEndButton(BuildContext context, bool isClosed, int pageNum) {
             child: TextButton(
               onPressed: () {
                 if (pageNum == 1 && isClosed) {
-                  // 모임종료 버튼이 클릭 되었을때.
+                  // 가치 끝내기 버튼이 클릭 되었을때 - 모집자 페이지.
                   print(isClosed);
-                } else {
-                  // 모집 종료 버튼이 클릭되었을 때
-                  print(isClosed);
+                  print("가치 끝내기");
+                } else if(pageNum ==0){
+                  // 지원하기 버튼을 눌렸을때 - 지원자 페이지
+                  print("지원하기 버튼");
+                }
+                else if(pageNum==1){
+                  // 모집 종료 버튼을 눌렸을때 - 모집자 페이지
+                  print("모집 종료 버튼");
                   setState(() {
                     isClosed = true; // 모집마감 변수를 true로 바꿔주면 모집마감에서 가치 마치기로 바뀜
                   });
