@@ -20,7 +20,7 @@ Widget loginTextBox() {
     child: Column(
       children: [
         Text(
-          'GAchi by IN21',
+          '같이 놀자!',
           style: AppTextStyles.postTitleTextStyle,
         ),
         SizedBox(height: 10),
