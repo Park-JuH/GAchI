@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 
 String warning = "값이 입력되지 않았어요!";
@@ -101,14 +102,15 @@ Widget nextBtn(BuildContext context, var next, var _textEditingController,
                     'id': id,
                     'pw': pw,
                     'idCard': getGender(value),
-                    'heart': 36
+                    'heart': 36,
+                    'like': [],
                   });
-                  if (newUser.user != null) {}
+                  if (newUser.user != null) {
+                  }
                 } catch (e) {
                   print(e);
                 }
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => next));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => next));
               } else {
                 print('Invalid value');
               }
