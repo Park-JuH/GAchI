@@ -20,12 +20,12 @@ Widget loginTextBox() {
     child: Column(
       children: [
         Text(
-          '나랑놀자!',
+          'GAchi by IN21',
           style: AppTextStyles.postTitleTextStyle,
         ),
         SizedBox(height: 10),
         Text(
-          '가천대학교 가치창출앱',
+          'Gachon and I, Gather Together!',
           style: AppTextStyles.postSub2TextStyle,
         ),
         SizedBox(height: 30),
