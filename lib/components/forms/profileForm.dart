@@ -15,12 +15,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 final _authentication = FirebaseAuth.instance;
 User? loggedUser;
+String? imageUrl;
 
-Widget profileImage() {
+Widget profileImage(String? imageUrl, VoidCallback changeProfileImage) {
   return Container(
     margin: EdgeInsets.only( top: 10,  bottom: 10),
     child: CircleAvatar(
-      backgroundImage: AssetImage('assets/images/gachi_logo.jpeg'),
+      backgroundImage: imageUrl != null && imageUrl.isNotEmpty
+          ? NetworkImage(imageUrl) as ImageProvider<Object>?
+          : AssetImage('assets/images/gachi_logo.jpeg'),
+
       radius: 70,
     ),
   );
@@ -36,13 +40,14 @@ Widget nickName(String nick) {
   );
 }
 
-Widget profileBox(BuildContext context, String nick, double temperD) {
+Widget profileBox(BuildContext context, String nick, double temperD,
+    String? imageUrl, VoidCallback changeProfileImage) {
   return Column(
     children: [
       Container(
         child: Column(
           children: [
-            profileImage(),
+            profileImage(imageUrl, changeProfileImage),
             nickName(nick),
           ],
         ),
@@ -50,7 +55,7 @@ Widget profileBox(BuildContext context, String nick, double temperD) {
       // Divider(
       //   thickness: 1,
       // ),
-      profileOndo(context, temperD)
+      profileOndo(context, temperD),
     ],
   );
 }
@@ -123,11 +128,18 @@ Widget profileBox2(BuildContext context, String route) {
         ),
 
         listBox(context, '활동 뱃지', route),
-        listBox(context,'다크모드', route),
-        listBox(context,'개발자에게 ', route),
+        listBox(context,'개발자에게', route),
         listBox(context,'로그아웃 ', route),
       ],
     ),
   );
 }
 
+class ProfileModify extends StatelessWidget {
+  const ProfileModify({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
