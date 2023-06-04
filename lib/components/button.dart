@@ -153,7 +153,7 @@ Widget registerbutton(BuildContext context, String text, String route,
 }
 
 /*               프로필 버튼 페이지  */
-Widget profileModify_button(BuildContext context, String text, String route, {VoidCallback? onPressed}) {
+Widget profileModify_button(BuildContext context, Future Function() _changeProfileImage, String text, String route, {VoidCallback? onPressed}) {
   double screenWidth = MediaQuery.of(context).size.width;
   double buttonWidth = screenWidth * 0.20; // 버튼 넓이
   return Align(
@@ -168,10 +168,7 @@ Widget profileModify_button(BuildContext context, String text, String route, {Vo
       ),
       child: TextButton(
         onPressed: () {
-          Navigator.pushNamed(context, route);
-          if (onPressed != null) {
-            onPressed();
-          }
+          _changeProfileImage();
         },
         style: TextButton.styleFrom(
           primary: Colors.white, // This sets the text color

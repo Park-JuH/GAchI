@@ -52,7 +52,6 @@ class MyApp extends StatelessWidget {
         '/profile':(context)=> const ProfilePage(),
         '/profileModify':(context)=> const ProfileModify(),
         '/register':(context)=> const NickName(),
-        //  '/regiseter':(context)=>(), 여기에 회원가입 페이지추가하면 돼요.
       },
     );
   }
@@ -90,9 +89,9 @@ class _MyHomePageState extends State<MyHomePage> {
             Center(
               child: pageNum == 0 ? VolunteerMainPage() : RescuritPage(),
             ),
-            Center(child: Interesting()),
-            Center(child: Chatting()),
-            Center(child: ProfilePage()),
+            const Center(child: Interesting()),
+            const Center(child: Chatting()),
+            const Center(child: ProfilePage()),
           ],
         ),
       ),
@@ -103,3 +102,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+

@@ -83,7 +83,7 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
-  Future<void> _changeProfileImage() async {
+  Future<void>  _changeProfileImage() async {
     final picker = ImagePicker();
     final pickedImage = await picker.getImage(source: ImageSource.gallery);
     if (pickedImage != null) {
@@ -114,18 +114,12 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: PreferredSize(
         preferredSize:
         Size.fromHeight(MediaQuery.of(context).size.height * 0.15),
-        child: profileAppbar(context),
+        child: profileAppbar(context, _changeProfileImage),
       ),
       body: ListView(
         children: [
           profileBox(context, nick, temperD, profileImageUrl, _changeProfileImage),
           profileBox2(context, '/loginHome'),
-          ElevatedButton(
-            onPressed: () {
-              _changeProfileImage();
-            },
-            child: Text('프로필 수정'),
-          ),
         ],
       ),
     );

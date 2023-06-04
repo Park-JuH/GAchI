@@ -134,7 +134,7 @@ Widget rescuritappbar() {
   );
 }
 
-Widget profileAppbar(BuildContext context) {
+Widget profileAppbar(BuildContext context, Future Function() _changeProfileImage) {
   return Container(
     child: Column(
       children: [
@@ -150,7 +150,7 @@ Widget profileAppbar(BuildContext context) {
               ),
             ),
             Container(
-              child: profileModify_button(context, '프로필수정', '/profileModify')
+              child: profileModify_button(context, _changeProfileImage, '프로필수정', '/profileModify')
                 ),
           ],
         ),

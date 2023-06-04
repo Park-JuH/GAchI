@@ -26,11 +26,11 @@ bool heart = false;
 List<String> mainState = ['모집 중', '모집마감', '모임종료'];
 
 class GachiItem {
-  final String title; // 방제목
+  final String title;
   final String text;
-  final String state; // 모임상태
-  final String category; // 모임 목적
-  final int index;    // 혹시나 몰라 게시글 등록번호입니다. (구분용)
+  final String state;
+  final String category;
+  final int index;
   final int group;
   final String uid;
   final String gender;
