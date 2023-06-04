@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:gachi/components/forms/postForm.dart';
 import 'package:gachi/pages/postDetailPage.dart';
 
 import '../../attributes/colors.dart';
 import '../../main.dart';
 
 /* 모집글 상세 정보 관련 위젯 */
-Widget gachiDetailBox(BuildContext context, String title, String detail,
-    String gender, int numOfPeople, String category) {
+Widget gachiDetailBox(BuildContext context, GachiItem gachiItem) {
   return Container(
     width: MediaQuery.of(context).size.width * 0.9,
     child: Column(
@@ -23,9 +23,10 @@ Widget gachiDetailBox(BuildContext context, String title, String detail,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               /*예시 코드고, 밑에 코드 사용하면 돼요 변수는 components/variable.dart에 저장해둠. */
-              text('dafdf', 28, FontWeight.w800, 15),
-              text('메뉴는 채팅으로 정합시다 밥 같이 먹어요오', 18, FontWeight.w500, 20),
-              text('여2남2', 15, FontWeight.w600, 5),
+              text(gachiItem.title, 28, FontWeight.w800, 15),
+              text(gachiItem.text, 18, FontWeight.w500, 20),
+              text(gachiItem.gender, 15, FontWeight.w600, 5),
+              // 데이터베이스 필드에 기한이랑 모집자 필드가 추가되어야 할 것 같아요
               text('D-Day 11am-13pm', 15, FontWeight.w600, 5),
               text('<모집자 : 가천대1짱>', 15, FontWeight.w600, 5),
 

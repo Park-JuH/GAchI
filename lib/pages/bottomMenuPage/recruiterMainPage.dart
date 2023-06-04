@@ -54,6 +54,7 @@ class _RescuritPageState extends State<RescuritPage> {
       if (document['uid'] == loggedUser!.uid) {
         GachiItem newItem = GachiItem(
             title: document['title'],
+            text: document['text'],
             state: '모집 중',
             category: document['category'],
             index: 2,

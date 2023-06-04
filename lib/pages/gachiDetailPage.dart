@@ -10,8 +10,8 @@ import '../main.dart';
 
 // 성별(여자,남자,혼성, 상관없음), 게시글 제목, 게시글 내용, 가치 카테고리
 class gachiDetail extends StatefulWidget {
-  const gachiDetail({Key? key, required GachiItem gachiItem}) : super(key: key);
-
+  gachiDetail({Key? key, required this.gachiItem}) : super(key: key);
+  final GachiItem gachiItem;
   @override
   State<gachiDetail> createState() => _gachiDetailState();
 }
@@ -22,6 +22,7 @@ class _gachiDetailState extends State<gachiDetail>
   bool isRecruitingClosed = false; // 모집 마감 여부를 저장하는 변수
   final String nickname = '';
   late final double temper;
+
 
   @override
   void initState() {
@@ -53,7 +54,7 @@ class _gachiDetailState extends State<gachiDetail>
             child: Column(
               children: [
                 gachiDetailBox(
-                    context, title, detail, gender, numOfPeople, category),
+                    context, widget.gachiItem),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

@@ -1,8 +1,10 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:gachi/components/forms/profileForm.dart';
 import 'package:material_dialogs/dialogs.dart';
 import 'package:pinput/pinput.dart';
 import '../button.dart';
@@ -25,6 +27,7 @@ List<String> mainState = ['모집 중', '모집마감', '모임종료'];
 
 class GachiItem {
   final String title; // 방제목
+  final String text;
   final String state; // 모임상태
   final String category; // 모임 목적
   final int index;    // 혹시나 몰라 게시글 등록번호입니다. (구분용)
@@ -35,6 +38,7 @@ class GachiItem {
 
   GachiItem({
     required this.title,
+    required this.text,
     required this.state,
     required this.category,
     required this.index,
@@ -79,6 +83,7 @@ Widget buildGachiItem(BuildContext context, GachiItem gachiItem, int pageNum) {
 
   return InkWell(
     onTap: () {
+      print(gachiItem.puid);
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -177,18 +182,63 @@ class _HeartState extends State<Heart> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(onTap : (){
+    return InkWell(
+        onTap : () {
+          final _authentication = FirebaseAuth.instance;
+          print(widget.puid);
 
-      print(widget.puid);
-      setState(() {
-        heart = !heart;
-        if (heart == true)
-          print("on");
-        else
-          print("off");
-      });
-    },
-        child: heart == true ? const Icon(Icons.favorite_rounded, color: Colors.deepOrange) : const Icon(Icons.favorite_outline_rounded)
+          try {
+            final user = _authentication.currentUser;
+            if (user != null) {
+              loggedUser = user;
+              print(loggedUser!.uid);
+              print((loggedUser!.uid).runtimeType);
+            }
+          } catch (e) {
+            print(e);
+          }
+          setState(() {
+            heart = !heart;
+            if (heart == true) {
+              CollectionReference postsCollection = FirebaseFirestore.instance.collection('Users');
+
+              postsCollection.doc(loggedUser!.uid).get().then((docSnapshot) {
+                print(docSnapshot);
+
+                if (docSnapshot.exists) {
+                  Map<String, dynamic> data = docSnapshot.data() as Map<
+                      String,
+                      dynamic>;
+                  List<String> likeList = List<String>.from(data['like'] ?? []);
+                  if (!likeList.contains(widget.puid)) {
+                    likeList.add(widget.puid);
+                    data['like'] = likeList;
+                    postsCollection.doc(loggedUser!.uid).update(data);
+                  }
+                }
+              });
+            } else {
+              CollectionReference postsCollection = FirebaseFirestore.instance.collection('Users');
+
+              postsCollection.doc(loggedUser!.uid).get().then((docSnapshot) {
+                print(docSnapshot);
+
+                if (docSnapshot.exists) {
+                  Map<String, dynamic> data = docSnapshot.data() as Map<
+                      String,
+                      dynamic>;
+                  List<String> likeList = List<String>.from(data['like'] ?? []);
+
+                  data['like'].remove(widget.puid);
+                  postsCollection.doc(loggedUser!.uid).update(data);
+                }
+              });
+            }
+          });
+        },
+        child: heart == true
+            ? const Icon(Icons.favorite_rounded, color: Colors.deepOrange)
+            : const Icon(Icons.favorite_outline_rounded)
     );
   }
 }

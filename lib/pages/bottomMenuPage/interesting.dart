@@ -44,29 +44,50 @@ class _InterestingState extends State<Interesting> {
     } catch (e) {
       print(e);
     }
+    CollectionReference usersCollection = FirebaseFirestore.instance.collection('Users');
     QuerySnapshot usersSnapshot =
     await FirebaseFirestore.instance.collection('Posts').get();
     List<QueryDocumentSnapshot> userDocuments = usersSnapshot.docs;
-
     List<GachiItem> gachiItems = [];
-    //여기서 uid를 적절한 방식으로 바꿔서 나타내면 될듯해요
-    for (QueryDocumentSnapshot document in userDocuments) {
-      if (document['uid'] == loggedUser!.uid) {
-        GachiItem newItem = GachiItem(
-            title: document['title'],
-            state: '모집 중',
-            category: document['category'],
-            index: 2,
-            group: document['group'],
-            uid: document['uid'],
-            gender: document['gender'],
-            puid: document['puid']
-        );
-        gachiItems.add(newItem);
+    usersCollection.doc(loggedUser!.uid).get().then((docSnapshot) {
+      print(docSnapshot);
+      if (docSnapshot.exists) {
+        Map<String, dynamic> data = docSnapshot.data() as Map<String, dynamic>;
+        List<String> likeList = List<String>.from(data['like'] ?? []);
+        for (String likeValue in likeList) {
+          print('Compare');
+          try {
+            for (QueryDocumentSnapshot document in userDocuments) {
+              String likes = document['puid'] as String;
+              print(likeValue);
+              print(likes);
+              if (likeValue == likes) {
+                print('same');
+                GachiItem newItem = GachiItem(
+                  title: document['title'],
+                  state: '모집 중',
+                  category: document['category'],
+                  index: 2,
+                  text: document['text'],
+                  group: document['group'],
+                  uid: document['uid'],
+                  gender: document['gender'],
+                  puid: document['puid'],
+                );
+                gachiItems.add(newItem);
+              }
+            }
+            _streamController.add(gachiItems);
+          } catch (e) {
+            // Firestore 작업 중 오류 처리
+            print('Error retrieving data: $e');
+          }
+        }
+        // usersCollection.doc(loggedUser!.uid).update(data);
       }
-    }
+    });
     // add items to stream
-    _streamController.add(gachiItems);
+    // _streamController.add(gachiItems);
   }
   @override
   Widget build(BuildContext context) {

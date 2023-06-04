@@ -16,22 +16,19 @@ class _ChattingState extends State<Chatting> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize:
-        Size.fromHeight(MediaQuery.of(context).size.height * 0.2),
+        Size.fromHeight(MediaQuery.of(context).size.height * 0.13),
         child: appbar(),
       ),
-      body: Container(
-        child: Column(
-          children: [
-            Expanded(child: Messages()),
-            Column(
-              children: [
-                NewMessage(),
-                SizedBox(height: 90,)
-              ],
-            )
-          ],
+      body: const Column(
+        children: [
+          Expanded(child: Messages()),
+          Column(
+            children: [
+              NewMessage(),
+            ],
+          )
+        ],
 
-        ),
       )
     );
   }
