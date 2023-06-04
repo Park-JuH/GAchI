@@ -73,6 +73,8 @@ class _InterestingState extends State<Interesting> {
                   uid: document['uid'],
                   gender: document['gender'],
                   puid: document['puid'],
+                  nick: document['nick'],
+                  date: document['date']
                 );
                 gachiItems.add(newItem);
               }

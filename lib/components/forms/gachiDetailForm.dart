@@ -27,8 +27,8 @@ Widget gachiDetailBox(BuildContext context, GachiItem gachiItem) {
               text(gachiItem.text, 18, FontWeight.w500, 20),
               text(gachiItem.gender, 15, FontWeight.w600, 5),
               // 데이터베이스 필드에 기한이랑 모집자 필드가 추가되어야 할 것 같아요
-              text('D-Day 11am-13pm', 15, FontWeight.w600, 5),
-              text('<모집자 : 가천대1짱>', 15, FontWeight.w600, 5),
+              text(gachiItem.date, 15, FontWeight.w600, 5),
+              text(gachiItem.nick, 15, FontWeight.w600, 5),
 
               // Text(title, style: TextStyle(fontSize: 28, fontWeight: FontWeight.w800)),  // 글제목
               // SizedBox(height: 15),

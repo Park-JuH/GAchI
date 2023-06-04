@@ -8,6 +8,7 @@ import 'package:gachi/pages/userAdd/gachiForm.dart';
 import '../components/forms/userAddForm.dart';
 import 'bottomMenuPage/recruiterMainPage.dart';
 import '../components/forms/makeGachiForm.dart';
+import 'package:intl/intl.dart';
 
 /*    <모집자 페이지>
       가치만들기(생성)  메인 코드
@@ -69,6 +70,11 @@ class MakeGachi extends StatelessWidget {
   }
 
   void _navigateToRecruitPage(BuildContext context) {
+    DateTime now = DateTime.now();
+    DateTime koreaTime = now.toUtc().add(const Duration(hours: 9)); // 한국 시간은 UTC 시간에 9시간을 더한 값입니다
+
+    String formattedTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(koreaTime); // 형식화된 시간 문자열 생성
+    // print(formattedTime); // 형식화된 시간 문자열 출력
     FormData formData = Provider.of<FormData>(context, listen: false);
     final _authentication = FirebaseAuth.instance;
     User? loggedUser;
@@ -91,24 +97,63 @@ class MakeGachi extends StatelessWidget {
     } catch (e) {
       print(e);
     }
-    CollectionReference postsCollection = FirebaseFirestore.instance.collection('Posts');
-
-    DocumentReference newDocRef = postsCollection.doc(); // 새로운 문서 생성
-
-    String newDocId = newDocRef.id; // 새로운 문서의 uid 얻기
-
-// 생성한 문서에 데이터 설정
-    newDocRef.set({
-      'category': formData.category,
-      'gender': formData.selectedGender,
-      'group': group,
-      'text': formData.body,
-      'title': formData.title,
-      'uid': loggedUser!.uid,
-      'puid': newDocId,
-    });
+    // String nick = '';
+    String uid = loggedUser!.uid;
     DocumentReference userDocRef =
     FirebaseFirestore.instance.collection('Users').doc(loggedUser!.uid);
+    userDocRef.get().then((docSnapshot) {
+        Map<String, dynamic> data = docSnapshot.data() as Map<String, dynamic>;
+        // final String nick = data['nick'];
+        // print(nick);
+        CollectionReference postsCollection = FirebaseFirestore.instance.collection('Posts');
+
+        DocumentReference newDocRef = postsCollection.doc(); // 새로운 문서 생성
+
+        String newDocId = newDocRef.id; // 새로운 문서의 uid 얻기
+
+// 생성한 문서에 데이터 설정
+      newDocRef.set({
+        'category': formData.category,
+        'gender': formData.selectedGender,
+        'group': group,
+        'text': formData.body,
+        'title': formData.title,
+        'uid': loggedUser!.uid,
+        'puid': newDocId,
+        'nick': data['nick'],
+        'date': formattedTime
+      });
+    });
+    // FirebaseFirestore.instance.collection('Users').doc(uid).get().then((docSnapshot) {
+    //   if (docSnapshot.exists) {
+    //     Map<String, dynamic> data = docSnapshot.data() as Map<String, dynamic>;
+    //     nick = data['nick'];
+    //   } else {
+    //     print('No user nick');
+    //   }
+    // }).catchError((error) {
+      // 오류 처리
+    // });
+//     CollectionReference postsCollection = FirebaseFirestore.instance.collection('Posts');
+//
+//     DocumentReference newDocRef = postsCollection.doc(); // 새로운 문서 생성
+//
+//     String newDocId = newDocRef.id; // 새로운 문서의 uid 얻기
+//
+// // 생성한 문서에 데이터 설정
+//     newDocRef.set({
+//       'category': formData.category,
+//       'gender': formData.selectedGender,
+//       'group': group,
+//       'text': formData.body,
+//       'title': formData.title,
+//       'uid': loggedUser!.uid,
+//       'puid': newDocId,
+//       'nick': nick,
+//       'date': formattedTime
+//     });
+    // DocumentReference userDocRef =
+    // FirebaseFirestore.instance.collection('Users').doc(loggedUser!.uid);
     // checkFormData(formData);
     // formdata를 파이어베이스에 보내면 됩니다!
     Navigator.of(context, rootNavigator: true).pop();
