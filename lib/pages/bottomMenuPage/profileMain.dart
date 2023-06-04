@@ -3,12 +3,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gachi/components/appbar.dart';
 import 'package:gachi/components/forms/profileForm.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:path/path.dart' as path;
+import 'dart:io';
+
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
+
 }
 
 
@@ -17,6 +23,7 @@ class _ProfilePageState extends State<ProfilePage> {
   User? loggedUser;
   int temper = 0;
   String nick = '';
+  String? profileImageUrl;
 
   @override
   void initState() {
@@ -24,17 +31,33 @@ class _ProfilePageState extends State<ProfilePage> {
     getCurrentUser();
   }
 
-  void getCurrentUser() {
+  void getCurrentUser() async {
     try {
       final user = _authentication.currentUser;
       if (user != null) {
-        loggedUser = user;
+        setState(() {
+          loggedUser = user;
+        });
         print(loggedUser!.uid);
         print((loggedUser!.uid).runtimeType);
+        await getUserProfileImageUrl();
         getUserUid();
       }
     } catch (e) {
       print(e);
+    }
+  }
+
+  Future<void> getUserProfileImageUrl() async {
+    final userDocRef = FirebaseFirestore.instance
+        .collection('Users')
+        .doc(loggedUser!.uid);
+
+    final userSnapshot = await userDocRef.get();
+    if (userSnapshot.exists) {
+      setState(() {
+        profileImageUrl = userSnapshot.get('profileImageUrl');
+      });
     }
   }
 
@@ -60,6 +83,30 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
+  Future<void> _changeProfileImage() async {
+    final picker = ImagePicker();
+    final pickedImage = await picker.getImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      String fileName = path.basename(pickedImage.path);
+      firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance.ref()
+          .child('profile_images')
+          .child(loggedUser!.uid)
+          .child(fileName);
+      firebase_storage.UploadTask uploadTask = ref.putFile(File(pickedImage.path));
+      firebase_storage.TaskSnapshot taskSnapshot = await uploadTask;
+      String imageUrl = await taskSnapshot.ref.getDownloadURL();
+
+      setState(() {
+        profileImageUrl = imageUrl;
+      });
+
+      final userDocRef =
+      FirebaseFirestore.instance.collection('Users').doc(loggedUser!.uid);
+      await userDocRef.update({'profileImageUrl': imageUrl});
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     double temperD = temper.toDouble();
@@ -71,15 +118,19 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       body: ListView(
         children: [
-          profileBox(context, nick, temperD),
+          profileBox(context, nick, temperD, profileImageUrl, _changeProfileImage),
           profileBox2(context, '/loginHome'),
+          ElevatedButton(
+            onPressed: () {
+              _changeProfileImage();
+            },
+            child: Text('프로필 수정'),
+          ),
         ],
-
       ),
     );
   }
 }
-
 
 class ProfileModify extends StatelessWidget {
   const ProfileModify({Key? key}) : super(key: key);
