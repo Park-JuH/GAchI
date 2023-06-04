@@ -244,11 +244,11 @@ class _userAddFormState extends State<userAddForm> {
             Column(
               children: [
                 const SizedBox(
-                  height: 10,
+                  height: 30,
                 ),
                 Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  height: 100,
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  height: 40,
                   child: Row(
                     children: [
                       InkWell(
@@ -269,7 +269,7 @@ class _userAddFormState extends State<userAddForm> {
             ),
             SizedBox(
                 height: pageNum != 2
-                    ? MediaQuery.of(context).size.height * 0.2
+                    ? pageNum != 4 ? MediaQuery.of(context).size.height * 0.2 : MediaQuery.of(context).size.height * 0.1
                     : MediaQuery.of(context).size.height * 0.15),
             Container(
                 margin: const EdgeInsets.symmetric(horizontal: 30),
@@ -280,7 +280,7 @@ class _userAddFormState extends State<userAddForm> {
                         ? Column(
                             children: [
                               _image != null
-                                  ? Container(
+                                  ? SizedBox(
                                       width: 300,
                                       height: 300,
                                       child: Image.file(File(
@@ -296,7 +296,7 @@ class _userAddFormState extends State<userAddForm> {
                                 children: [
                                   ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                        primary: Color(0xFFEF8C00),
+                                        primary: const Color(0xFFEF8C00),
                                         elevation: 0),
                                     onPressed: () {
                                       getImage(ImageSource
@@ -307,7 +307,7 @@ class _userAddFormState extends State<userAddForm> {
                                   const SizedBox(width: 30),
                                   ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                        primary: Color(0xFFEF8C00),
+                                        primary: const Color(0xFFEF8C00),
                                         elevation: 0),
                                     onPressed: () {
                                       getImage(ImageSource
