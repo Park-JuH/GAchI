@@ -175,26 +175,38 @@ class _userAddFormState extends State<userAddForm> {
   String recognizedText = '';
 
   Future<void> pickImageAndGCUText() async {
-    final inputImage = InputImage.fromFilePath(_image!.path);
-    final textRecognizer = GoogleMlKit.vision.textRecognizer();
-    final RecognizedText recognizedTextResult =
-        await textRecognizer.processImage(inputImage);
+  final inputImage = InputImage.fromFilePath(_image!.path);
+  final textRecognizer = GoogleMlKit.vision.textRecognizer();
+  final RecognizedText recognizedTextResult =
+      await textRecognizer.processImage(inputImage);
 
-    String text = '';
-    for (TextBlock block in recognizedTextResult.blocks) {
-      for (TextLine line in block.lines) {
-        for (TextElement element in line.elements) {
-          text = text + ' ' + element.text;
-        }
+  String text = '';
+  for (TextBlock block in recognizedTextResult.blocks) {
+    for (TextLine line in block.lines) {
+      for (TextElement element in line.elements) {
+        text = text + ' ' + element.text;
       }
     }
-
-    textRecognizer.close();
-
-    setState(() {
-      recognizedText = text;
-    });
   }
+
+  textRecognizer.close();
+
+  // 파싱한 데이터 중 학번 탐색
+  RegExp exp = new RegExp(r'\b20\d{7}\b');
+  Iterable<Match> matches = exp.allMatches(text);
+
+  // 학번 파싱 안된 경우
+  if(matches.isNotEmpty){
+    text = matches.first.group(0)!;
+  }
+  else {
+    text = 'No ID found';
+  }
+
+  setState(() {
+    recognizedText = text;
+  });
+}
 
   //이미지를 가져오는 함수
   Future getImage(ImageSource imageSource) async {
@@ -309,7 +321,7 @@ class _userAddFormState extends State<userAddForm> {
                                 height: 1,
                               ),
                               Text(
-                                'Recognized Text: $recognizedText',
+                                'Your Student ID: $recognizedText',
                                 style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 20,
